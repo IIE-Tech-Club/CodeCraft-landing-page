@@ -1,46 +1,122 @@
-# Astro Starter Kit: Basics
+# CodeCraft Landing Page
 
-```sh
-npm create astro@latest -- --template basics
-```
+Landing page for **CodeCraft** by IIE Tech Club (Ideal Institute of Engineering), built with Astro and Tailwind CSS.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The site presents event highlights, timeline, rules, submission details, organizer profiles, and contact info with a neon, futuristic UI.
 
-## 🚀 Project Structure
+## Live Demo
 
-Inside of your Astro project, you'll see the following folders and files:
+https://code-craft-landing-page-alpha.vercel.app/
+
+## Tech Stack
+
+- Astro 5
+- Tailwind CSS 3
+- PostCSS + Autoprefixer
+- Vanilla JS for interactive behavior (loader, countdown, reveal effects, modal interactions)
+
+## Key Features
+
+- Animated hero with countdown and glowing visual effects
+- Scroll-aware navbar and responsive menu behavior
+- Timeline section with custom curved path layout
+- Prizes, rules, and submission sections with reusable data-driven rendering
+- Organizer showcase cards
+- Contact section with quick tap-to-call links
+- Registration modal and reveal-on-scroll transitions
+
+## Project Structure
 
 ```text
 /
 ├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+├── src/
+│   ├── assets/
+│   │   ├── images/
+│   │   └── svg/
+│   ├── components/
+│   │   └── Navbar.astro
+│   ├── pages/
+│   │   └── index.astro
+│   └── styles/
+│       ├── global.css
+│       ├── index.css
+│       └── nav.css
+├── astro.config.mjs
+├── tailwind.config.mjs
+├── postcss.config.mjs
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Getting Started
 
-## 🧞 Commands
+### Prerequisites
 
-All commands are run from the root of the project, from a terminal:
+- Node.js 18+ (recommended)
+- pnpm (recommended) or npm
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### Install
 
-## 👀 Want to learn more?
+```bash
+pnpm install
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Or:
+
+```bash
+npm install
+```
+
+### Run Development Server
+
+```bash
+pnpm dev
+```
+
+Open: `http://localhost:4321`
+
+## Scripts
+
+| Script | Command | Description |
+| :-- | :-- | :-- |
+| Dev | `pnpm dev` | Start local dev server |
+| Build | `pnpm build` | Build static output to `dist/` |
+| Preview | `pnpm preview` | Preview production build locally |
+| Astro CLI | `pnpm astro` | Run Astro CLI commands |
+
+## Content Editing Guide
+
+Most site content is managed at the top of `src/pages/index.astro`:
+
+- `timeline` for event schedule
+- `prizes` for prize cards
+- `rules` for participation rules
+- `submissionRequirements` for submission cards
+- `organizers` for organizer profiles
+
+Layout and styling:
+
+- Core styles: `src/styles/global.css`
+- Navbar component: `src/components/Navbar.astro`
+- Design tokens: `tailwind.config.mjs`
+
+## Build and Deployment
+
+Create production build:
+
+```bash
+pnpm build
+```
+
+Preview build:
+
+```bash
+pnpm preview
+```
+
+Deploy the generated `dist/` directory to your static hosting provider.
+
+## Notes
+
+- Timeline icons can be emoji, image paths, or imported SVG components.
+- If you update timeline icon rendering logic, avoid forcing all icon types into a URL string to prevent `404` path lookups.
