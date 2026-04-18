@@ -1,0 +1,88 @@
+---
+import logoImg from "../assets/images/logo-high.png";
+---
+
+<header class="fixed inset-x-0 top-0 z-50 px-0 flex justify-center w-full transition-all duration-700 ease-in-out" id="site-nav-container">
+  <nav class="w-full max-w-[1280px] rounded-none border border-transparent transition-all duration-700 ease-in-out" 
+       style="background: transparent; backdrop-filter: none;" 
+       id="site-nav">
+    <div class="px-8 py-8 transition-all duration-700 ease-in-out flex items-center justify-between" id="site-nav-inner">
+      <!-- Logo and Brand (Left) -->
+      <a class="flex-shrink-0 flex items-center gap-3 text-text-main hover:text-accent-cyan transition-colors" href="#home" aria-label="home">
+        <img
+          src={logoImg.src}
+          alt="CodeCraft logo"
+          class="w-10 h-10 sm:w-12 sm:h-12 object-contain flex-shrink-0"
+        />
+        <div class="leading-tight">
+          <h1 class="text-2xl sm:text-3xl font-orbitron font-black uppercase tracking-wider text-text-main">CodeCraft</h1>
+        </div>
+      </a>
+
+      <!-- Center Navigation (hidden on mobile) -->
+      <nav class="hidden md:flex items-center gap-8 text-text-muted text-xs font-orbitron uppercase tracking-[0.1em]">
+        <a href="#about" class="hover:text-accent-cyan transition-colors duration-300">About</a>
+        <a href="#prizes" class="hover:text-accent-cyan transition-colors duration-300">Prizes</a>
+        <a href="#timeline" class="hover:text-accent-cyan transition-colors duration-300">Timeline</a>
+        <a href="#rules" class="hover:text-accent-cyan transition-colors duration-300">Rules</a>
+        <a href="#submission" class="hover:text-accent-cyan transition-colors duration-300">Submit</a>
+      </nav>
+
+      <!-- Right Side CTA -->
+      <div class="flex items-center flex-shrink-0">
+        <button class="hidden md:inline-block px-6 py-3 bg-accent-cyan text-black font-bold text-xs rounded-full transition-all duration-300 hover:shadow-neon hover:scale-105 cursor-pointer tracking-wider" type="button" data-open-register>
+          REGISTER NOW
+        </button>
+        <button class="md:hidden flex flex-col gap-1.5 bg-none border-none p-2 cursor-pointer" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span class="block w-5 h-0.5 bg-text-main transition-all duration-300"></span>
+          <span class="block w-5 h-0.5 bg-text-main transition-all duration-300"></span>
+          <span class="block w-5 h-0.5 bg-text-main transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const hamburger = document.getElementById('hamburger') as HTMLButtonElement;
+  const navContainer = document.getElementById('site-nav-container') as HTMLElement;
+  const siteNav = document.getElementById('site-nav') as HTMLElement;
+  const siteNavInner = document.getElementById('site-nav-inner') as HTMLElement;
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('is-open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      // Scrolled down - floating pill shape
+      navContainer.classList.remove('top-0', 'px-0');
+      navContainer.classList.add('top-6', 'px-4');
+      
+      siteNav.classList.remove('rounded-none', 'border-transparent');
+      siteNav.classList.add('rounded-[50px]', 'border-accent-cyan/20', 'shadow-neon-glow');
+      siteNav.style.background = 'rgba(10, 15, 30, 0.75)';
+      siteNav.style.backdropFilter = 'blur(12px)';
+
+      siteNavInner.classList.remove('py-8');
+      siteNavInner.classList.add('py-4');
+    } else {
+      // Top of page - full width transparent
+      navContainer.classList.remove('top-6', 'px-4');
+      navContainer.classList.add('top-0', 'px-0');
+      
+      siteNav.classList.remove('rounded-[50px]', 'border-accent-cyan/20', 'shadow-neon-glow');
+      siteNav.classList.add('rounded-none', 'border-transparent');
+      siteNav.style.background = 'transparent';
+      siteNav.style.backdropFilter = 'none';
+
+      siteNavInner.classList.remove('py-4');
+      siteNavInner.classList.add('py-8');
+    }
+  };
+
+  // Run on load and on scroll
+  handleScroll();
+  window.addEventListener('scroll', handleScroll, { passive: true });
+</script>

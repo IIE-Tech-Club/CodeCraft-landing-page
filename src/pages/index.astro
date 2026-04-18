@@ -1,0 +1,661 @@
+---
+import Navbar from "../components/Navbar.astro";
+import logoImg from "../assets/images/logo-high.png";
+import "../styles/global.css";
+import registration from "../assets/svg/register-svgrepo-com.svg";
+import collaction from "../assets/svg/collection-upload-svgrepo-com.svg";
+import presentation from "../assets/svg/presentation-6-svgrepo-com.svg";
+import reward from "../assets/svg/award-reward-svgrepo-com.svg";
+
+const timeline = [
+  { title: "Registration Opens",   date: "20 August",        icon: registration, desc: "Sign up your team and claim your spot" },
+  { title: "Registration Closes",  date: "15 September",     icon: registration, desc: "Last chance to register your team" },
+  { title: "PPT Submission Starts",       date: "10 September",  icon: collaction, desc: "Submit your presentation slides" },
+  { title: "PPT Submission Ends",       date: "20 September",  icon: collaction, desc: "Submit your presentation slides" },
+  { title: "Project Presentation", date: "21 September",     icon: presentation, desc: "Demo your project to the judges" },
+  { title: "Award Ceremony",       date: "25 September",     icon: reward, desc: "Winners announced & prizes distributed" },
+];
+
+const timelineTones = ["cyan", "blue", "orange", "purple", "blue"];
+const timelinePattern = [
+  { row: 1, slot: 1 },
+  { row: 1, slot: 2 },
+  { row: 1, slot: 3 },
+  { row: 2, slot: 3 },
+  { row: 2, slot: 2 },
+  { row: 2, slot: 1 },
+  { row: 3, slot: 1 },
+  { row: 3, slot: 2 },
+];
+
+const timelineStops = timeline.map((item, index) => {
+  const mapped = timelinePattern[index] ?? {
+    row: Math.floor(index / 3) + 1,
+    slot: (index % 3) + 1,
+  };
+
+  return {
+    ...item,
+    ...mapped,
+    tone: timelineTones[index % timelineTones.length],
+  };
+});
+
+const timelineRowCount = Math.max(...timelineStops.map((stop) => stop.row), 1);
+const laneVariants = ["timeline-lane-top", "timeline-lane-middle", "timeline-lane-bottom"];
+
+const timelineRows = Array.from({ length: timelineRowCount }, (_, rowIndex) => {
+  const rowNumber = rowIndex + 1;
+  return {
+    variant: laneVariants[rowIndex] ?? "timeline-lane-middle",
+    isLast: rowIndex === timelineRowCount - 1,
+    items: timelineStops.filter((stop) => stop.row === rowNumber).sort((a, b) => a.slot - b.slot),
+  };
+});
+
+const organizers = [
+  { name: "Ayush Choudhary",  img: "AC",github: "https://github.com/ayushchoudhary",linkedin:"https://www.linkedin.com/in/ayushchoudhary" },
+  { name: "Rahidul Khan",    img: "RK",github: "https://github.com/rahidulkhan",linkedin:"https://www.linkedin.com/in/rahidulkhan" },
+  { name: "Nilotpal Das",    img: "ND",github: "https://github.com/nilotpal das",linkedin:"https://www.linkedin.com/in/nilotpal-das" },
+  { name: "Ronit Banerjee", img: "RB",github: "https://github.com/ronitbanerjee",linkedin:"https://www.linkedin.com/in/ronitbanerjee" },
+  { name: "Debankan Dutta", img: "DD",github: "https://github.com/debankandutta",linkedin:"https://www.linkedin.com/in/debankandutta" },
+];
+
+const prizes = [
+  { place: "1st", amount: "₹2,000", emoji: "🥇", color: "gold",   rank: 1 },
+  { place: "2nd", amount: "₹1,000", emoji: "🥈", color: "silver", rank: 2 },
+  { place: "3rd", amount: "₹500",   emoji: "🥉", color: "bronze", rank: 3 },
+];
+
+const rules = [
+  { text: "Team size: 2–4 members from any year (1st–4th)", icon: "👥" },
+  { text: "All team members must be from the college",       icon: "🏫" },
+  { text: "Teams must submit PPT before the deadline",       icon: "📅" },
+  { text: "Hardware integration is mandatory, not optional", icon: "⚙️" },
+  { text: "Plagiarism of code or ideas will lead to DQ",    icon: "🚫" },
+  { text: "Teams can use open-source libraries & frameworks",icon: "📦" },
+  { text: "Final project must be demonstrated live",         icon: "🎥" },
+];
+
+const submissionRequirements = [
+  { title: "PPT Submission",       desc: "Mandatory presentation slides covering your project",  icon: "📊", tag: "Required", color: "orange" },
+  { title: "GitHub Repository",    desc: "Optional: share your open source code repository",     icon: "💻", tag: "Optional", color: "blue" },
+  { title: "Software Demo",        desc: "Optional: a working demo of your software component",  icon: "⚙️", tag: "Optional", color: "blue" },
+  { title: "Hardware Demo Video",  desc: "Optional: showcase your hardware integration on video",icon: "🎥", tag: "Optional", color: "blue" },
+];
+
+const features = [
+  { icon: "💡", title: "Innovation First",     desc: "Build solutions combining software intelligence with hardware creativity." },
+  { icon: "⚙️", title: "Integration Focus",    desc: "Master embedded systems, IoT, and web platforms in one cohesive prototype." },
+  { icon: "🚀", title: "Real Impact",          desc: "Cross-year teams (1st–4th year) working on projects that matter." },
+];
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="CODECRAFT — Where Software Meets Hardware. The ultimate hackathon at Ideal Institute of Engineering where builders blend code, circuits, and creativity." />
+    <title>CODECRAFT | Where Software Meets Hardware</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="relative w-full">
+      <!-- Ambient blobs -->
+      <div class="fixed pointer-events-none opacity-10 w-[600px] h-[600px] bg-accent-blue top-0 left-0 rounded-full" style="filter: blur(120px);"></div>
+      <div class="fixed pointer-events-none opacity-10 w-[700px] h-[700px] bg-accent-purple bottom-20 right-0 rounded-full" style="filter: blur(120px);"></div>
+      <div class="fixed pointer-events-none opacity-10 w-[500px] h-[500px] bg-accent-orange top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full" style="filter: blur(120px);"></div>
+
+      <!-- Cursor glow -->
+      <div class="fixed pointer-events-none w-[400px] h-[400px] bg-accent-cyan rounded-full opacity-0" id="cursor-glow" style="filter: blur(80px); transform: translate(-50%, -50%); margin-left: -200px; margin-top: -200px;"></div>
+
+      <!-- Page loader -->
+      <div class="loader fixed inset-0 z-999 flex flex-col items-center justify-center gap-8 bg-gradient-to-b from-[#0c2238] via-[#071325] to-[#030812] transition-all duration-500" id="loader" aria-hidden="true" style="isolation: isolate;">
+        <div class="absolute inset-0 opacity-[0.06] pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 256 256%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noise%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noise)%27/%3E%3C/svg%3E');"></div>
+        <div class="absolute rounded-full opacity-0" style="width: min(72vw, 420px); aspect-ratio: 1; background: radial-gradient(circle, rgba(0, 242, 254, 0.2) 0%, transparent 68%); animation: loader-pulse 2.8s ease-in-out infinite; z-index: -1;"></div>
+        <img src={logoImg.src} alt="CodeCraft" class="w-[clamp(86px,11vw,124px)] opacity-0" style="filter: drop-shadow(0 0 24px rgba(0, 242, 254, 0.5)); transform: translateY(-80px) scale(0.72); animation: loader-entry 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s forwards, float 4s ease-in-out 1.1s infinite;" />
+        <div class="relative opacity-0" style="width: min(48vw, 200px); height: 2px; border-radius: 999px; background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.5), transparent); transform: scaleX(0); transform-origin: center; overflow: hidden; animation: loader-line-reveal 0.65s ease 0.4s forwards;">
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.86)] to-transparent" style="transform: translateX(-120%); animation: loader-sweep 1.35s linear 1.05s infinite;"></div>
+        </div>
+        <span class="text-[0.7rem] text-[rgba(214,244,255,0.7)] opacity-0" style="margin-top: -0.25rem; text-transform: uppercase; letter-spacing: 0.34em; transform: translateY(10px); animation: loader-caption 0.55s ease 0.72s forwards;">Booting CODECRAFT</span>
+      </div>
+
+      <Navbar />
+
+      <main>
+
+        <!-- ═══════════════════════════════════════════════════════ HERO -->
+        <section class="relative min-h-screen flex items-center py-[100px] pb-16 overflow-hidden" id="home">
+          <!-- Background -->
+          <div class="absolute inset-0 -z-10 pointer-events-none">
+            <div class="absolute inset-0" style="background-image: linear-gradient(rgba(0, 242, 254, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 242, 254, 0.05) 1px, transparent 1px); background-size: 50px 50px; mask-image: radial-gradient(circle at center, black 0%, transparent 80%);"></div>
+            <div class="absolute w-[400px] h-[400px] bg-accent-blue -top-[100px] -left-[100px] rounded-full opacity-15" style="filter: blur(100px);"></div>
+            <div class="absolute w-[400px] h-[400px] bg-accent-purple -bottom-[100px] -right-[100px] rounded-full opacity-15" style="filter: blur(100px);"></div>
+            <div class="absolute w-[300px] h-[300px] bg-accent-orange top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15" style="filter: blur(100px);"></div>
+          </div>
+
+          <!-- Content -->
+          <div class="grid grid-cols-[0.8fr_1.2fr] gap-16 items-center w-[min(1280px,100%-3rem)] mx-auto">
+            <!-- Hero text -->
+            <div>
+              <div class="inline-flex items-center gap-3 bg-[rgba(0,242,254,0.1)] border border-[rgba(0,242,254,0.2)] px-4 py-2 rounded-full font-orbitron text-[0.75rem] text-accent-cyan mb-8" style="letter-spacing: 0.1em;">
+                <span class="w-[8px] h-[8px] bg-accent-cyan rounded-full" style="box-shadow: 0 0 10px var(--accent-cyan); animation: pulse 2s infinite;"></span>
+                Ideal Institute of Engineering · IIE Tech Club
+              </div>
+
+              <h1 class="text-5xl lg:text-6xl leading-[0.9] m-0 mb-4 font-black" style="font-size: clamp(3rem, 10vw, 6rem); letter-spacing: -0.02em;">
+                <span class="bg-gradient-cyan-blue bg-clip-text text-transparent">CODE</span><span class="text-text-main">CRAFT</span>
+              </h1>
+
+              <p class="font-orbitron text-2xl lg:text-3xl text-accent-blue mb-6" style="font-size: clamp(1.25rem, 3vw, 2rem);">Where Software Meets Hardware</p>
+
+              <p class="text-text-muted text-lg max-w-[50ch] mb-12">
+                Build the future by merging code and circuits. Join the ultimate hackathon where innovation meets engineering excellence.
+              </p>
+
+              <!-- Countdown -->
+              <div class="inline-flex gap-6 mb-12 bg-[rgba(255,255,255,0.03)] px-8 py-6 rounded-lg border border-[rgba(255,255,255,0.05)]" id="countdown" aria-label="Time until event">
+                <div class="flex flex-col items-center">
+                  <span class="font-orbitron text-4xl font-bold text-text-main leading-tight" id="cd-days">--</span>
+                  <span class="text-[0.75rem] text-text-muted mt-2" style="text-transform: uppercase; letter-spacing: 0.1em;">Days</span>
+                </div>
+                <div class="font-orbitron text-4xl text-accent-cyan opacity-50">:</div>
+                <div class="flex flex-col items-center">
+                  <span class="font-orbitron text-4xl font-bold text-text-main leading-tight" id="cd-hours">--</span>
+                  <span class="text-[0.75rem] text-text-muted mt-2" style="text-transform: uppercase; letter-spacing: 0.1em;">Hours</span>
+                </div>
+                <div class="font-orbitron text-4xl text-accent-cyan opacity-50">:</div>
+                <div class="flex flex-col items-center">
+                  <span class="font-orbitron text-4xl font-bold text-text-main leading-tight" id="cd-mins">--</span>
+                  <span class="text-[0.75rem] text-text-muted mt-2" style="text-transform: uppercase; letter-spacing: 0.1em;">Mins</span>
+                </div>
+                <div class="font-orbitron text-4xl text-accent-cyan opacity-50">:</div>
+                <div class="flex flex-col items-center">
+                  <span class="font-orbitron text-4xl font-bold text-text-main leading-tight" id="cd-secs">--</span>
+                  <span class="text-[0.75rem] text-text-muted mt-2" style="text-transform: uppercase; letter-spacing: 0.1em;">Secs</span>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-4 items-center mb-12">
+                <button class="inline-flex items-center gap-3 bg-accent-cyan text-black px-8 py-4 rounded-full font-bold transition-all duration-300 hover:-translate-y-[3px]" type="button" data-open-register style="box-shadow: 0 0 30px rgba(0, 242, 254, 0.4); cursor: pointer;">
+                  <span>Register Now</span>
+                  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" class="w-5 h-5"><path d="M4 10h12M12 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="inline-flex items-center px-8 py-4 rounded-full bg-transparent border border-[rgba(255,255,255,0.1)] text-text-main font-semibold transition-all duration-300 hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.2)]" type="button" data-scroll-to="#about" style="cursor: pointer;">
+                  Learn More
+                </button>
+              </div>
+
+              <!-- <div class="flex gap-12 items-center">
+                <div class="flex flex-col">
+                  <strong class="font-orbitron text-4xl text-text-main" data-counter="300" data-suffix="+">300+</strong>
+                  <span class="text-text-muted text-sm" style="text-transform: uppercase; letter-spacing: 0.1em;">Participants</span>
+                </div>
+                <div class="w-px h-[30px] bg-[rgba(255,255,255,0.1)]"></div>
+                <div class="flex flex-col">
+                  <strong class="font-orbitron text-4xl text-text-main" data-counter="5" data-suffix="+">5+</strong>
+                  <span class="text-text-muted text-sm" style="text-transform: uppercase; letter-spacing: 0.1em;">Days</span>
+                </div>
+                <div class="w-px h-[30px] bg-[rgba(255,255,255,0.1)]"></div>
+                <div class="flex flex-col">
+                  <strong class="font-orbitron text-4xl text-text-main">₹3.5K</strong>
+                  <span class="text-text-muted text-sm" style="text-transform: uppercase; letter-spacing: 0.1em;">Prize Pool</span>
+                </div>
+              </div> -->
+            </div>
+
+            <!-- Hero visual: logo showcase -->
+            <div class="relative flex justify-center">
+              <div class="relative w-[500px] h-[500px] grid place-items-center">
+                <div class="absolute w-[250px] h-[250px] rounded-full" style="background: radial-gradient(circle, rgba(0, 242, 254, 0.2) 0%, transparent 70%);"></div>
+                <div class="absolute rounded-full border border-[rgba(0,242,254,0.2)] w-[280px] h-[280px]" style="animation: spin 20s linear infinite;"></div>
+                <div class="absolute rounded-full border-dashed border border-[rgba(0,242,254,0.2)] w-[340px] h-[340px]" style="animation: spin 30s linear infinite reverse;"></div>
+                <div class="absolute rounded-full border border-[rgba(0,242,254,0.2)] w-[400px] h-[400px] opacity-50" style="animation: spin 40s linear infinite;"></div>
+                <img src={logoImg.src} alt="CodeCraft Logo" class="w-[260px] z-5" style="filter: drop-shadow(0 0 40px rgba(0, 242, 254, 0.5)); animation: float 6s ease-in-out infinite;" />
+                <!-- Orbiting dots -->
+                <div class="absolute rounded-full border border-[rgba(255,255,255,0.05)] w-[310px] h-[310px]" style="animation: spin 15s linear infinite;">
+                  <span class="absolute top-[-5px] left-1/2 w-[10px] h-[10px] bg-accent-cyan rounded-full" style="box-shadow: 0 0 10px var(--accent-cyan);"></span>
+                </div>
+                <div class="absolute rounded-full border border-[rgba(255,255,255,0.05)] w-[370px] h-[370px]" style="animation: spin 25s linear infinite reverse;">
+                  <span class="absolute top-[-5px] left-1/2 w-[10px] h-[10px] bg-accent-cyan rounded-full" style="box-shadow: 0 0 10px var(--accent-cyan);"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scroll indicator -->
+          <!-- <div class="absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-none" aria-hidden="true">
+            <div class="block w-6 h-10 border-2 border-text-muted rounded-full relative opacity-70">
+              <div class="absolute top-2 left-1/2 w-[2px] h-2 bg-text-muted rounded-full -translate-x-1/2" style="animation: scroll-down 2s ease-in-out infinite;"></div>
+            </div>
+            <div class="block w-6 h-10 border-2 border-text-muted rounded-full relative opacity-70">
+              <div class="absolute top-2 left-1/2 w-[2px] h-2 bg-text-muted rounded-full -translate-x-1/2" style="animation: scroll-down 2s ease-in-out infinite;"></div>
+            </div>
+          </div> -->
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════ ABOUT -->
+        <section class="min-h-screen flex flex-col items-center justify-center py-16 lg:py-32" id="about">
+          <div class="w-[min(1280px,100%-3rem)] mx-auto">
+            <div class="text-center mb-16 opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+              <p class="font-orbitron text-[0.75rem] text-accent-cyan mb-2" style="text-transform: uppercase; letter-spacing: 0.2em;">What is CODECRAFT?</p>
+              <h2 class="text-5xl lg:text-6xl font-black m-0 mb-4" style="letter-spacing: -0.02em;">Build. Integrate. Innovate.</h2>
+              <p class="text-text-muted text-lg max-w-[60ch] mx-auto">A hackathon where software meets hardware — teams build real, working projects that blend code with circuits.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+              {features.map((f) => (
+                <div class="p-12 lg:p-10 bg-bg-alt rounded-lg border border-panel-border transition-all duration-400 relative overflow-hidden hover:-translate-y-[10px] hover:bg-[rgba(255,255,255,0.03)] hover:border-accent-cyan">
+                  <div class="text-4xl mb-6">{f.icon}</div>
+                  <h3 class="text-2xl mb-4">{f.title}</h3>
+                  <p class="text-text-muted m-0">{f.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════ PRIZES -->
+        <section class="min-h-screen flex flex-col items-center justify-center py-16 lg:py-32 relative" id="prizes">
+          <div class="w-[min(1280px,100%-3rem)] mx-auto">
+            <div class="text-center opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+              <p class="font-orbitron text-[0.75rem] text-accent-cyan " style="text-transform: uppercase; letter-spacing: 0.2em;">Rewards</p>
+              <h2 class="text-5xl lg:text-6xl font-black m-0 mb-4" style="letter-spacing: -0.02em;">Prize Pool</h2>
+              <p class="text-text-muted text-lg max-w-[60ch] mx-auto">Total Prize Pool: ₹3,500 + Certificates for all participants</p>
+            </div>
+
+       
+            </div>
+
+            <div class="grid grid-cols-3 gap-10 items-end max-w-4xl mx-auto pt-16 opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+              {prizes.map((p) => (
+                <div class={`relative p-12 lg:p-8 bg-bg-alt rounded-lg border transition-all duration-400 flex flex-col items-center text-center hover:-translate-y-[5px] hover:border-[rgba(255,255,255,0.2)] ${
+                  p.rank === 1 ? 'h-[380px] order-2 border-[#fbbf2466] bg-gradient-to-b from-[rgba(251,191,36,0.05)] to-transparent' :
+                  p.rank === 2 ? 'h-[320px] order-1 border-[#94a3b866]' :
+                  'h-[280px] order-3 border-[#b4530966]'
+                }`} data-rank={p.rank}>
+                  <div class="absolute inset-0 opacity-0"></div>
+                  <div class="text-5xl mb-4">{p.emoji}</div>
+                  <div class="font-orbitron text-sm text-text-muted mb-2" style="text-transform: uppercase;">{p.place} Place</div>
+                  <div class={`font-orbitron text-4xl font-black ${p.rank === 1 ? 'text-[#fbbf24]' : 'text-text-main'}`}>{p.amount}</div>
+                  <div></div>
+                </div>
+              ))}
+            </div>
+
+            <p class="text-center text-text-muted mt-12 opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">🏆 Plus certificates and recognition for all participants</p>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════ TIMELINE -->
+        <section class="min-h-screen flex flex-col items-center justify-center py-16 lg:py-32 relative" id="timeline">
+          <div class="w-[min(1280px,100%-3rem)] mx-auto">
+            <div class="text-center mb-16 opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+              <p class="font-orbitron text-[0.75rem] text-accent-cyan mb-2" style="text-transform: uppercase; letter-spacing: 0.2em;">Schedule</p>
+              <h2 class="text-5xl lg:text-6xl font-black m-0 mb-4" style="letter-spacing: -0.02em;">Event Timeline</h2>
+              <p class="text-text-muted text-lg max-w-[60ch] mx-auto">Key dates to keep in your calendar</p>
+            </div>
+
+            <div class="timeline-road opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+              {timelineRows.map((row) => (
+                <div class={`timeline-lane ${row.variant} ${row.isLast ? 'timeline-lane-last' : 'timeline-lane-continues'}`}>
+                  {row.items.map((item) => {
+                    const iconValue = item.icon;
+                    const isStringIcon = typeof iconValue === "string";
+                    const isEmojiIcon = isStringIcon && [...iconValue].length <= 3;
+                    const IconComponent = item.icon;
+
+                    return (
+                      <article class={`timeline-stop tone-${item.tone}`} style={`--slot: ${item.slot};`}>
+                        <span class="timeline-node">
+                          <span class="timeline-emoji">
+                            {isEmojiIcon
+                              ? iconValue
+                              : isStringIcon
+                                ? <img src={iconValue} alt="" loading="lazy" />
+                                : <IconComponent />}
+                          </span>
+                        </span>
+                        <div class="timeline-copy">
+                          <h3>{item.title}</h3>
+                          <p class="timeline-date">{item.date}</p>
+                          <p class="timeline-desc">{item.desc}</p>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════ RULES -->
+        <section class="min-h-screen flex flex-col items-center justify-center py-16 lg:py-32 relative" id="rules">
+          <div class="w-[min(1280px,100%-3rem)] mx-auto">
+            <div class="text-center mb-16 opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+              <p class="font-orbitron text-[0.75rem] text-accent-cyan mb-2" style="text-transform: uppercase; letter-spacing: 0.2em;">Guidelines</p>
+              <h2 class="text-5xl lg:text-6xl font-black m-0 mb-4" style="letter-spacing: -0.02em;">Participation Rules</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+              {rules.map((rule, idx) => (
+                <div class="p-6 bg-bg-alt rounded-md border-l-4 border-accent-blue flex items-center gap-6 transition-all duration-300 hover:bg-[rgba(255,255,255,0.03)] hover:translate-x-[10px]" style={`--i: ${idx}`}>
+                  <span class="font-orbitron text-xl opacity-20">{String(idx + 1).padStart(2, "0")}</span>
+                  <span class="text-2xl">{rule.icon}</span>
+                  <p>{rule.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════ SUBMISSION -->
+        <section class="min-h-screen flex flex-col items-center justify-center py-16 lg:py-32 relative" id="submission">
+          <div class="w-[min(1280px,100%-3rem)] mx-auto">
+            <div class="text-center mb-16 opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+              <p class="font-orbitron text-[0.75rem] text-accent-cyan mb-2" style="text-transform: uppercase; letter-spacing: 0.2em;">Deliverables</p>
+              <h2 class="text-5xl lg:text-6xl font-black m-0 mb-4" style="letter-spacing: -0.02em;">Submission Requirements</h2>
+              <p class="text-text-muted text-lg max-w-[60ch] mx-auto">Submit between 10–20 September. Include all mandatory materials.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+              {submissionRequirements.map((req) => (
+                <div class={`p-10 lg:p-8 bg-bg-alt rounded-lg border border-panel-border text-center relative ${
+                  req.color === 'orange' ? 'border-t-4 border-t-accent-orange' : 'border-t-4 border-t-accent-blue'
+                }`}>
+                  <div class="text-4xl mb-4">{req.icon}</div>
+                  <span class={`inline-block px-3 py-1 rounded-full text-[0.75rem] font-bold mb-4 ${
+                    req.tag.toLowerCase() === 'required' 
+                      ? 'bg-[rgba(255,140,66,0.1)] text-accent-orange border border-[rgba(255,140,66,0.2)]'
+                      : 'bg-[rgba(79,172,254,0.1)] text-accent-blue border border-[rgba(79,172,254,0.2)]'
+                  }`} style="text-transform: uppercase;">{req.tag}</span>
+                  <h3 class="text-lg">{req.title}</h3>
+                  <p class="text-sm">{req.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-[rgba(255,255,255,0.03)] p-12 rounded-lg border border-panel-border opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+              <div>
+                <h3 class="text-accent-cyan mb-6">📝 PPT Format</h3>
+                <ul class="p-0 list-none grid gap-4">
+                  <li class="text-text-muted flex gap-4"><span class="text-accent-cyan font-black">•</span> Maximum 15 slides</li>
+                  <li class="text-text-muted flex gap-4"><span class="text-accent-cyan font-black">•</span> Include problem statement &amp; solution</li>
+                  <li class="text-text-muted flex gap-4"><span class="text-accent-cyan font-black">•</span> Add team member details</li>
+                  <li class="text-text-muted flex gap-4"><span class="text-accent-cyan font-black">•</span> Showcase hardware-software integration</li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="text-accent-cyan mb-6">💡 Pro Tips</h3>
+                <ul class="p-0 list-none grid gap-4">
+                  <li class="text-text-muted flex gap-4"><span class="text-accent-cyan font-black">•</span> Clearly explain your innovation</li>
+                  <li class="text-text-muted flex gap-4"><span class="text-accent-cyan font-black">•</span> Include diagrams and flowcharts</li>
+                  <li class="text-text-muted flex gap-4"><span class="text-accent-cyan font-black">•</span> Mention technologies used</li>
+                  <li class="text-text-muted flex gap-4"><span class="text-accent-cyan font-black">•</span> Highlight real-world applications</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════ ORGANIZERS -->
+        <section class="min-h-screen flex flex-col items-center justify-center py-16 lg:py-32 relative" id="organizers">
+          <div class="w-[min(1280px,100%-3rem)] mx-auto">
+            <div class="text-center mb-16 opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+              <p class="font-orbitron text-[0.75rem] text-accent-cyan mb-2" style="text-transform: uppercase; letter-spacing: 0.2em;">The Team</p>
+              <h2 class="text-5xl lg:text-6xl font-black m-0 mb-4" style="letter-spacing: -0.02em;">Meet the Organizers</h2>
+              <p class="text-text-muted text-lg max-w-[60ch] mx-auto">Passionate people bringing CODECRAFT to life</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+              {organizers.map((org, i) => (
+                <div class="text-center p-8 bg-bg-alt rounded-lg border border-panel-border transition-all duration-300 hover:-translate-y-2 hover:border-accent-cyan" style={`--i: ${i}`}>
+                  <div class="w-20 h-20 bg-gradient-blue-purple rounded-full mx-auto mb-6 grid place-items-center text-2xl font-bold text-white">{org.img}</div>
+                  <h3 class="text-lg mb-1">{org.name}</h3>
+                  <div class="flex justify-center gap-4 mt-4">
+                    <div>
+                      <a href="https://github.com" target="_blank" rel="noreferrer" aria-label="GitHub" class="text-text-muted hover:text-accent-cyan">
+                        <svg viewBox="0 0 24 24" class="w-6 h-6"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.8 1.2 1.8 1.2 1 .1 1.7-.2 2.1-.6.1-.7.4-1.1.7-1.3-2.5-.3-5.1-1.2-5.1-5.4 0-1.2.4-2.2 1.1-3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3 .9a10.5 10.5 0 0 1 5.4 0c2.1-1.2 3-.9 3-.9.6 1.6.2 2.8.1 3.1.7.8 1.1 1.8 1.1 3 0 4.2-2.6 5.1-5.1 5.4.4.3.8 1 .8 2.1v3.1c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z" fill="currentColor"/></svg>
+                      </a>
+                    </div>
+                    <div>
+                      <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn" class="text-text-muted hover:text-accent-cyan">
+                          <svg viewBox="0 0 24 24" class="w-6 h-6"><path d="M4.98 3.5A2.48 2.48 0 1 1 0 3.48a2.48 2.48 0 0 1 4.98.02ZM.5 8.2h4.9V24H.5V8.2Zm8.1 0h4.7v2.1h.1c.7-1.2 2.5-2.5 5.2-2.5 5.5 0 6.5 3.6 6.5 8.2V24h-4.9v-7c0-1.7 0-3.9-2.3-3.9s-2.7 1.8-2.7 3.8V24H8.6V8.2Z" fill="currentColor"/></svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════ CONTACT -->
+        <section class="min-h-screen flex flex-col items-center justify-center py-16 lg:py-32 relative" id="contact">
+          <div class="w-[min(1280px,100%-3rem)] mx-auto">
+            <div class="contact-card opacity-0 transform translate-y-[30px] transition-all duration-[0.8s] reveal" style="transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);">
+              <div class="contact-aurora contact-aurora-a"></div>
+              <div class="contact-aurora contact-aurora-b"></div>
+
+              <div class="contact-left">
+                <p class="contact-kicker">Get in touch</p>
+                <h2 class="contact-title">Need Help?</h2>
+                <p class="contact-sub">Reach out to our coordinators directly</p>
+                <div class="contact-chips" aria-label="Support highlights">
+                  <span class="contact-chip">Fast response</span>
+                  <span class="contact-chip">Student coordinators</span>
+                  <span class="contact-chip">Tap to call</span>
+                </div>
+              </div>
+
+              <div class="contact-right">
+                <a href="tel:+918473868464" class="contact-link" aria-label="Call +91 8473 868 464">
+                  <span class="contact-link-icon">📞</span>
+                  <div class="flex flex-col text-left">
+                    <span class="text-[1.8rem] font-semibold">Ayush Choudhary</span>
+                    <span class="contact-link-text">+91 8473 868 464</span>
+                  </div>
+                  <span class="contact-link-action">Call</span>
+                </a>
+                <a href="tel:+919832577462" class="contact-link" aria-label="Call +91 9832 577 462">
+                  <span class="contact-link-icon">📞</span>
+                  <div class="flex flex-col text-left">
+                    <span class="text-[1.8rem] font-bold">Rahidul Khan</span>
+                    <span class="contact-link-text">+91 9832 577 462</span>
+                  </div>
+                  <span class="contact-link-action">Call</span>
+                </a>
+                <a href="tel:+919382770196" class="contact-link" aria-label="Call +91 9382 770 196">
+                  <span class="contact-link-icon">📞</span>
+                  <div class="flex flex-col text-left">
+                    <span>Debankan Dutta</span>
+                    <span class="contact-link-text">+91 9382 770 196</span>
+                  </div>
+                  <span class="contact-link-action">Call</span>
+                </a>
+                <a href="tel:+919832577462" class="contact-link" aria-label="Call +91 9832 577 462">
+                  <span class="contact-link-icon">📞</span>
+                  <div class="flex flex-col text-left">
+                    <span>Bob Johnson</span>
+                    <span class="contact-link-text">+91 9832 577 462</span>
+                  </div>
+                  <span class="contact-link-action">Call</span>
+                </a>
+                <a href="tel:+919832577462" class="contact-link" aria-label="Call +91 9832 577 462">
+                  <span class="contact-link-icon">📞</span>
+                  <div class="flex flex-col text-left">
+                    <span>Alice Williams</span>
+                    <span class="contact-link-text">+91 9832 577 462</span>
+                  </div>
+                  <span class="contact-link-action">Call</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- ══════════════════════════════════════════════════════ FOOTER -->
+      <footer class="bg-bg-alt border-t border-panel-border pt-24">
+        <div class="grid grid-cols-3 items-center pb-16 w-[min(1280px,100%-3rem)] mx-auto">
+          <div class="flex items-center gap-4">
+            <img src={logoImg.src} alt="CodeCraft" class="w-[50px] mb-4" />
+            <div>
+              <p class="font-orbitron text-xl font-black m-0">CODECRAFT</p>
+              <p class="text-sm text-text-muted m-0">Built by IIE Tech Club</p>
+            </div>
+          </div>
+
+          <nav class="flex justify-center gap-10 text-text-muted" aria-label="Footer navigation">
+            <a href="#about" class="hover:text-accent-cyan">About</a>
+            <a href="#timeline" class="hover:text-accent-cyan">Timeline</a>
+            <a href="#prizes" class="hover:text-accent-cyan">Prizes</a>
+            <a href="#rules" class="hover:text-accent-cyan">Rules</a>
+            <a href="#submission" class="hover:text-accent-cyan">Submission</a>
+            <a href="#organizers" class="hover:text-accent-cyan">Team</a>
+          </nav>
+
+          <div class="flex justify-end gap-6">
+            <a href="https://github.com" target="_blank" rel="noreferrer" aria-label="GitHub" class="text-text-muted hover:text-accent-cyan">
+              <svg viewBox="0 0 24 24" class="w-6 h-6"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.8 1.2 1.8 1.2 1 .1 1.7-.2 2.1-.6.1-.7.4-1.1.7-1.3-2.5-.3-5.1-1.2-5.1-5.4 0-1.2.4-2.2 1.1-3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3 .9a10.5 10.5 0 0 1 5.4 0c2.1-1.2 3-.9 3-.9.6 1.6.2 2.8.1 3.1.7.8 1.1 1.8 1.1 3 0 4.2-2.6 5.1-5.1 5.4.4.3.8 1 .8 2.1v3.1c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z" fill="currentColor"/></svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn" class="text-text-muted hover:text-accent-cyan">
+              <svg viewBox="0 0 24 24" class="w-6 h-6"><path d="M4.98 3.5A2.48 2.48 0 1 1 0 3.48a2.48 2.48 0 0 1 4.98.02ZM.5 8.2h4.9V24H.5V8.2Zm8.1 0h4.7v2.1h.1c.7-1.2 2.5-2.5 5.2-2.5 5.5 0 6.5 3.6 6.5 8.2V24h-4.9v-7c0-1.7 0-3.9-2.3-3.9s-2.7 1.8-2.7 3.8V24H8.6V8.2Z" fill="currentColor"/></svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram" class="text-text-muted hover:text-accent-cyan">
+              <svg viewBox="0 0 24 24" class="w-6 h-6"><path d="M7 0h10a7 7 0 0 1 7 7v10a7 7 0 0 1-7 7H7a7 7 0 0 1-7-7V7a7 7 0 0 1 7-7Zm0 2.2A4.8 4.8 0 0 0 2.2 7v10A4.8 4.8 0 0 0 7 21.8h10a4.8 4.8 0 0 0 4.8-4.8V7A4.8 4.8 0 0 0 17 2.2H7Zm5 3.7a6.1 6.1 0 1 1 0 12.2 6.1 6.1 0 0 1 0-12.2Zm0 2.2a3.9 3.9 0 1 0 0 7.8 3.9 3.9 0 0 0 0-7.8Zm6.5-.8a1.4 1.4 0 1 1 0 2.8 1.4 1.4 0 0 1 0-2.8Z" fill="currentColor"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="border-t border-panel-border pt-8 pb-8 text-center text-text-muted text-sm">
+          <p>© 2026 CODECRAFT · Ideal Institute of Engineering · All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════ MODAL -->
+    <dialog class="bg-bg-alt border border-panel-border rounded-3xl text-text-main p-0 w-[min(600px,100%-2rem)]" id="register-modal" style="backdrop-filter: blur(8px);">
+      <form method="dialog" class="p-12 relative" id="register-form">
+        <button class="absolute right-6 top-6 bg-none border-none text-text-muted text-2xl" type="button" data-close-register aria-label="Close" style="cursor: pointer;">×</button>
+
+        <div class="flex items-center gap-6 mb-8">
+          <img src={logoImg.src} alt="CodeCraft" class="w-[60px]" />
+          <div>
+            <p class="font-orbitron text-[0.75rem] text-accent-cyan mb-2" style="text-transform: uppercase; letter-spacing: 0.2em;">Registration</p>
+            <h2 class="text-text-main">Join CODECRAFT</h2>
+          </div>
+        </div>
+
+        <p class="text-text-muted mb-8">Fill in your team details below to register for the hackathon.</p>
+
+        <div class="grid grid-cols-2 gap-6 mb-8">
+          <label class="block">
+            <span class="block mb-2 text-sm text-text-muted">Team Name</span>
+            <input type="text" name="teamName" placeholder="Circuit Rangers" required class="w-full bg-[rgba(255,255,255,0.05)] border border-panel-border rounded-md px-4 py-3 text-white" style="color: white;" />
+          </label>
+          <label class="block">
+            <span class="block mb-2 text-sm text-text-muted">Contact Email</span>
+            <input type="email" name="email" placeholder="team@college.edu" required class="w-full bg-[rgba(255,255,255,0.05)] border border-panel-border rounded-md px-4 py-3 text-white" style="color: white;" />
+          </label>
+          <label class="block">
+            <span class="block mb-2 text-sm text-text-muted">Team Size</span>
+            <input type="number" name="members" min="2" max="4" placeholder="4" required class="w-full bg-[rgba(255,255,255,0.05)] border border-panel-border rounded-md px-4 py-3 text-white" style="color: white;" />
+          </label>
+          <label class="block">
+            <span class="block mb-2 text-sm text-text-muted">Track</span>
+            <select name="track" required class="w-full bg-[rgba(255,255,255,0.05)] border border-panel-border rounded-md px-4 py-3 text-white" style="color: white;">
+              <option value="">Choose a focus</option>
+              <option>IoT and embedded systems</option>
+              <option>Web and product engineering</option>
+              <option>AI and automation</option>
+              <option>Hardware prototyping</option>
+            </select>
+          </label>
+        </div>
+
+        <button class="w-full bg-accent-cyan text-black font-black px-0 py-4 rounded-full border-none text-base mb-4" type="submit" style="cursor: pointer;">Submit Registration →</button>
+        <p class="text-center text-accent-cyan text-sm mt-4" data-modal-status></p>
+      </form>
+    </dialog>
+
+    <script is:inline>
+      // ── Loader
+      window.addEventListener("load", () => {
+        setTimeout(() => document.getElementById("loader")?.classList.add("is-hidden"), 700);
+      });
+
+      // ── Cursor glow
+      document.addEventListener("pointermove", (e) => {
+        const g = document.getElementById("cursor-glow");
+        if (g) g.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      });
+
+      // ── Modal
+      const modal = document.getElementById("register-modal");
+      document.querySelectorAll("[data-open-register]").forEach(b => b.addEventListener("click", () => modal?.showModal()));
+      document.querySelector("[data-close-register]")?.addEventListener("click", () => modal?.close());
+      modal?.addEventListener("click", (e) => {
+        const r = modal.getBoundingClientRect();
+        if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) modal.close();
+      });
+
+      // ── Scroll-to
+      document.querySelectorAll("[data-scroll-to]").forEach(b => {
+        b.addEventListener("click", () => {
+          const el = document.querySelector(b.getAttribute("data-scroll-to"));
+          el?.scrollIntoView({ behavior: "smooth" });
+        });
+      });
+
+      // ── Form
+      document.getElementById("register-form")?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const s = document.querySelector("[data-modal-status]");
+        if (s) s.textContent = "✅ Registration received! We'll be in touch.";
+      });
+
+      // ── Scroll reveal
+      const ro = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          if (en.isIntersecting) { en.target.classList.add("in-view"); ro.unobserve(en.target); }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".reveal").forEach(el => ro.observe(el));
+
+      // ── Counter animation
+      const animateCount = (node) => {
+        const target = +node.dataset.counter || 0;
+        const suffix = node.dataset.suffix || "";
+        const dur = 1400, start = performance.now();
+        const tick = (now) => {
+          const p = Math.min((now - start) / dur, 1);
+          node.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      const co = new IntersectionObserver((entries) => {
+        entries.forEach(en => { if (en.isIntersecting) { animateCount(en.target); co.unobserve(en.target); } });
+      }, { threshold: 0.5 });
+      document.querySelectorAll("[data-counter]").forEach(el => co.observe(el));
+
+      // ── Countdown to event (21 Sep 2026)
+      const target = new Date("2026-09-21T09:00:00");
+      const pad = n => String(n).padStart(2, "0");
+      const updateCD = () => {
+        const diff = target - Date.now();
+        if (diff <= 0) { document.getElementById("countdown")?.remove(); return; }
+        const s = Math.floor(diff / 1000);
+        document.getElementById("cd-days").textContent  = pad(Math.floor(s / 86400));
+        document.getElementById("cd-hours").textContent = pad(Math.floor((s % 86400) / 3600));
+        document.getElementById("cd-mins").textContent  = pad(Math.floor((s % 3600) / 60));
+        document.getElementById("cd-secs").textContent  = pad(s % 60);
+      };
+      updateCD(); setInterval(updateCD, 1000);
+    </script>
+  </body>
+</html>
