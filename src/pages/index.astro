@@ -1,6 +1,8 @@
 ---
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import Loader from "../components/Loader.astro";
+import CustomCursor from "../components/CustomCursor.astro";
 import logoImg from "../assets/images/logo-high.png";
 import "../styles/global.css";
 import registration from "../assets/svg/register-svgrepo-com.svg";
@@ -10,8 +12,8 @@ import reward from "../assets/svg/award-reward-svgrepo-com.svg";
 
 const timeline = [
   { title: "Registration Opens",   date: "20 August",    icon: registration, desc: "Sign up your team and claim your spot" },
-  { title: "Registration Closes",  date: "15 September", icon: registration, desc: "Last chance to register your team" },
   { title: "PPT Submission Starts",date: "10 September", icon: collaction,   desc: "Submit your presentation slides" },
+  { title: "Registration Closes",  date: "15 September", icon: registration, desc: "Last chance to register your team" },
   { title: "PPT Submission Ends",  date: "20 September", icon: collaction,   desc: "Deadline for all submissions" },
   { title: "Project Presentation", date: "21 September", icon: presentation, desc: "Demo your project to the judges" },
   { title: "Award Ceremony",       date: "25 September", icon: reward,       desc: "Winners announced & prizes distributed" },
@@ -96,15 +98,8 @@ const features = [
         <div style="position:absolute;width:500px;height:500px;background:#00f2fe;top:40%;left:55%;border-radius:50%;filter:blur(140px);opacity:0.04;transform:translate(-50%,-50%);"></div>
       </div>
 
-      <!-- Cursor glow -->
-      <div id="cursor-glow" aria-hidden="true" style="position:fixed;pointer-events:none;width:350px;height:350px;background:#00f2fe;border-radius:50%;opacity:0;filter:blur(80px);z-index:1;transform:translate(-50%,-50%);transition:opacity 0.4s ease;"></div>
-
-      <!-- Page loader -->
-      <div class="loader" id="loader" aria-hidden="true">
-        <img src={logoImg.src} alt="CodeCraft" class="loader-logo" />
-        <div class="loader-ring"><div class="loader-ring-inner"></div></div>
-        <span>Booting CODECRAFT</span>
-      </div>
+      <CustomCursor />
+      <Loader logoSrc={logoImg.src} />
 
       <Navbar />
 
@@ -113,7 +108,6 @@ const features = [
         <!-- ══════════════════════════════════════════════ HERO ══ -->
         <section class="hero" id="home" aria-label="Hero">
           <div class="hero-grid-bg" aria-hidden="true"></div>
-          <div class="hero-scanline" aria-hidden="true"></div>
 
           <div class="wrap" style="position:relative;z-index:2;">
             <div class="hero-content">
@@ -132,7 +126,8 @@ const features = [
                 <p class="hero-tagline">Where Software Meets Hardware</p>
 
                 <p class="hero-desc">
-                  Build the future by merging code and circuits. Join the ultimate hackathon where innovation meets engineering excellence.
+                  <span style="color:var(--c-cyan);">// STATUS: ACTIVE</span><br/>
+                  Bridge the gap between virtual logic and physical circuits. Join the ultimate hardware-first hackathon where raw code meets real engineering.
                 </p>
 
                 <!-- Countdown -->
@@ -175,18 +170,36 @@ const features = [
               <!-- Right visual column -->
               <div class="hero-visual" aria-hidden="true">
                 <div class="logo-stage">
+                  <!-- HUD Tactical Brackets -->
+                  <div class="hud-corner h-tl"></div>
+                  <div class="hud-corner h-tr"></div>
+                  <div class="hud-corner h-bl"></div>
+                  <div class="hud-corner h-br"></div>
+                  
+                  <!-- HUD Data Readouts -->
+                  <div class="hud-data d-left">SYS_v2.0.4</div>
+                  <div class="hud-data d-right">LOC: 23.8°N</div>
+
+                  <!-- Ambient Elements -->
                   <div class="logo-halo"></div>
                   <div class="logo-ring lr-1"></div>
                   <div class="logo-ring lr-2"></div>
                   <div class="logo-ring lr-3"></div>
                   <div class="logo-ring lr-4"></div>
+
+                  <!-- Enhanced Orbits -->
                   <div class="orbit orbit-1">
-                    <span class="orbit-dot"></span>
+                    <span class="orbit-node node-a">0x1A</span>
                   </div>
                   <div class="orbit orbit-2">
-                    <span class="orbit-dot orbit-dot-alt"></span>
+                    <span class="orbit-node node-b">CMD</span>
                   </div>
-                  <img src={logoImg.src} alt="" class="logo-img" />
+                  
+                  <!-- Logo with Glitch Container -->
+                  <div class="logo-container">
+                    <img src={logoImg.src} alt="" class="logo-img" />
+                    <div class="logo-scanner"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -230,9 +243,9 @@ const features = [
             </div>
 
             <div class="feature-grid reveal-stagger">
-              {features.map((f) => (
-                <div class="fcard">
-                  <span class="fcard-num">// {f.num}</span>
+              {features.map((f, i) => (
+                <div class="fcard" data-index={i + 1}>
+                  <span class="fcard-num">MODULE_{f.num}</span>
                   <span class="fcard-icon">{f.icon}</span>
                   <h3>{f.title}</h3>
                   <p>{f.desc}</p>
@@ -260,7 +273,6 @@ const features = [
                   <div class="podium-medal">{p.emoji}</div>
                   <div class="podium-place">{p.place} Place</div>
                   <div class="podium-amount">{p.amount}</div>
-                  <p class="podium-cert">+ Certificate of Achievement</p>
                 </div>
               ))}
             </div>
@@ -494,6 +506,14 @@ const features = [
                   </div>
                   <span class="contact-link-action">Call</span>
                 </a>
+                <a href="tel:+918473868464" class="contact-link" aria-label="Call Ronit Banerjee">
+                  <span class="contact-link-icon">📞</span>
+                  <div style="display:flex;flex-direction:column;gap:0.15rem;">
+                    <span style="font-size:1.1rem;font-weight:600;color:white;">Ronit Banerjee</span>
+                    <span class="contact-link-text">+91 8473 868 464</span>
+                  </div>
+                  <span class="contact-link-action">Call</span>
+                </a>
               </div>
             </div>
           </div>
@@ -507,24 +527,6 @@ const features = [
     <!-- ══════════════════════════════════════════════ MODAL REMOVED ══ -->
 
     <script is:inline>
-      // ── Loader
-      window.addEventListener("load", () => {
-        setTimeout(() => document.getElementById("loader")?.classList.add("is-hidden"), 700);
-      });
-
-      // ── Cursor glow
-      const glow = document.getElementById("cursor-glow");
-      document.addEventListener("pointermove", (e) => {
-        if (glow) {
-          glow.style.left = e.clientX + "px";
-          glow.style.top  = e.clientY + "px";
-          glow.style.opacity = "0.06";
-        }
-      });
-      document.addEventListener("pointerleave", () => {
-        if (glow) glow.style.opacity = "0";
-      });
-
       // ── Scroll-to
       document.querySelectorAll("[data-scroll-to]").forEach(b => {
         b.addEventListener("click", () => {
@@ -576,7 +578,7 @@ const features = [
     <script>
       import { googleLogin } from '../services/authService';
       
-      document.querySelectorAll('[data-auth-trigger]').forEach(btn => {
+      document.querySelectorAll<HTMLElement>('[data-auth-trigger]').forEach(btn => {
         btn.addEventListener('click', async (e) => {
           e.preventDefault();
           

@@ -1,0 +1,31 @@
+---
+interface Props {
+  logoSrc: string;
+}
+const { logoSrc } = Astro.props;
+---
+
+<div class="loader" id="loader" aria-hidden="true">
+  <img src={logoSrc} alt="CodeCraft" class="loader-logo" />
+  <div class="loader-ring"><div class="loader-ring-inner"></div></div>
+  <span>Booting CODECRAFT</span>
+</div>
+
+<script is:inline>
+  // ── Loader & Entry Behavior
+  // Block scroll and force top position immediately
+  document.body.style.overflow = "hidden";
+  window.history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+
+  window.addEventListener("load", () => {
+    // Ensure we are at top after all content loads
+    window.scrollTo(0, 0);
+    
+    setTimeout(() => {
+      document.getElementById("loader")?.classList.add("is-hidden");
+      // Re-enable scrolling
+      document.body.style.overflow = "auto";
+    }, 800);
+  });
+</script>
