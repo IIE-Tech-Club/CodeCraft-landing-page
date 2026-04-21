@@ -6,5 +6,6 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://code-craft-landing-page-alpha.vercel.app',
   integrations: [tailwind(), react()],
 });
