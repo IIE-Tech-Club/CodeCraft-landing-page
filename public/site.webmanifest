@@ -1,0 +1,17 @@
+{
+  "name": "CODECRAFT 2026",
+  "short_name": "CODECRAFT",
+  "description": "Hardware-first hackathon by IIE Tech Club at Ideal Institute of Engineering.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020811",
+  "theme_color": "#020811",
+  "icons": [
+    {
+      "src": "/CodeCraft.png",
+      "sizes": "352x236",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

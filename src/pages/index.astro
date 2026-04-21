@@ -9,93 +9,306 @@ import registration from "../assets/svg/register-svgrepo-com.svg";
 import collaction from "../assets/svg/collection-upload-svgrepo-com.svg";
 import presentation from "../assets/svg/presentation-6-svgrepo-com.svg";
 import reward from "../assets/svg/award-reward-svgrepo-com.svg";
+import ayush from "../assets/people/Ayush.jpeg";
 
 const timeline = [
-  { title: "Registration Opens",   date: "20 August",    icon: registration, desc: "Sign up your team and claim your spot" },
-  { title: "PPT Submission Starts",date: "10 September", icon: collaction,   desc: "Submit your presentation slides" },
-  { title: "Registration Closes",  date: "15 September", icon: registration, desc: "Last chance to register your team" },
-  { title: "PPT Submission Ends",  date: "20 September", icon: collaction,   desc: "Deadline for all submissions" },
-  { title: "Project Presentation", date: "21 September", icon: presentation, desc: "Demo your project to the judges" },
-  { title: "Award Ceremony",       date: "25 September", icon: reward,       desc: "Winners announced & prizes distributed" },
+  {
+    title: "Registration Opens",
+    date: "20 August",
+    icon: registration,
+    desc: "Sign up your team and claim your spot",
+  },
+  {
+    title: "PPT Submission Starts",
+    date: "10 September",
+    icon: collaction,
+    desc: "Submit your presentation slides",
+  },
+  {
+    title: "Registration Closes",
+    date: "15 September",
+    icon: registration,
+    desc: "Last chance to register your team",
+  },
+  {
+    title: "PPT Submission Ends",
+    date: "20 September",
+    icon: collaction,
+    desc: "Deadline for all submissions",
+  },
+  {
+    title: "Project Presentation",
+    date: "21 September",
+    icon: presentation,
+    desc: "Demo your project to the judges",
+  },
+  {
+    title: "Award Ceremony",
+    date: "25 September",
+    icon: reward,
+    desc: "Winners announced & prizes distributed",
+  },
 ];
 
 const timelineTones = ["cyan", "blue", "orange", "purple", "blue"];
 const timelinePattern = [
-  { row: 1, slot: 1 }, { row: 1, slot: 2 }, { row: 1, slot: 3 },
-  { row: 2, slot: 3 }, { row: 2, slot: 2 }, { row: 2, slot: 1 },
+  { row: 1, slot: 1 },
+  { row: 1, slot: 2 },
+  { row: 1, slot: 3 },
+  { row: 2, slot: 3 },
+  { row: 2, slot: 2 },
+  { row: 2, slot: 1 },
 ];
 
 const timelineStops = timeline.map((item, index) => {
-  const mapped = timelinePattern[index] ?? { row: Math.floor(index / 3) + 1, slot: (index % 3) + 1 };
-  return { ...item, ...mapped, tone: timelineTones[index % timelineTones.length] };
+  const mapped = timelinePattern[index] ?? {
+    row: Math.floor(index / 3) + 1,
+    slot: (index % 3) + 1,
+  };
+  return {
+    ...item,
+    ...mapped,
+    tone: timelineTones[index % timelineTones.length],
+  };
 });
 
 const timelineRowCount = Math.max(...timelineStops.map((s) => s.row), 1);
-const laneVariants = ["timeline-lane-top", "timeline-lane-middle", "timeline-lane-bottom"];
+const laneVariants = [
+  "timeline-lane-top",
+  "timeline-lane-middle",
+  "timeline-lane-bottom",
+];
 
 const timelineRows = Array.from({ length: timelineRowCount }, (_, i) => ({
   variant: laneVariants[i] ?? "timeline-lane-middle",
   isLast: i === timelineRowCount - 1,
-  items: timelineStops.filter((s) => s.row === i + 1).sort((a, b) => a.slot - b.slot),
+  items: timelineStops
+    .filter((s) => s.row === i + 1)
+    .sort((a, b) => a.slot - b.slot),
 }));
 
 const organizers = [
-  { name: "Ayush Choudhary",  init: "AC", github: "https://github.com/ayushchoudhary",  linkedin: "https://www.linkedin.com/in/ayushchoudhary" },
-  { name: "Rahidul Khan",     init: "RK", github: "https://github.com/rahidulkhan",     linkedin: "https://www.linkedin.com/in/rahidulkhan" },
-  { name: "Nilotpal Das",     init: "ND", github: "https://github.com/nilotpaldas",     linkedin: "https://www.linkedin.com/in/nilotpal-das" },
-  { name: "Ronit Banerjee",   init: "RB", github: "https://github.com/ronitbanerjee",   linkedin: "https://www.linkedin.com/in/ronitbanerjee" },
-  { name: "Debankan Dutta",   init: "DD", github: "https://github.com/debankandutta",   linkedin: "https://www.linkedin.com/in/debankandutta" },
+  {
+    name: "Ayush Choudhary",
+    init: "AC",
+    github: "https://github.com/AR128",
+    linkedin: "https://www.linkedin.com/in/ayush-choudhary-920a88324/",
+    role: "Organizer",
+    imageUrl: ayush,
+  },
+  {
+    name: "Rahidul Khan",
+    init: "RK",
+    github: "https://github.com/Rahidul2006",
+    linkedin: "https://www.linkedin.com/in/rahidul-khan-6a3922269",
+    role: "Designer",
+    imageUrl: ayush,
+  },
+  {
+    name: "Nilotpal Das",
+    init: "ND",
+    github: "https://github.com/NilotpalDas008",
+    linkedin: "https://www.linkedin.com/in/nilotpal-das-95291b2a2",
+    role: "",
+    imageUrl: ayush,
+  },
+  {
+    name: "Ronit Banerjee",
+    init: "RB",
+    github: "https://github.com/Ronit77777",
+    linkedin: "https://www.linkedin.com/in/ronit-banerjee-2232b61a3/",
+    role: "",
+    imageUrl: ayush,
+  },
+  {
+    name: "Debankan Dutta",
+    init: "DD",
+    github: "https://github.com/dev-debankan",
+    linkedin: "https://www.linkedin.com/in/debankan-dutta-b73688336/",
+    role: "",
+    imageUrl: ayush,
+  },
 ];
 
 const prizes = [
   { place: "1st", amount: "₹2,000", emoji: "🥇", rank: 1 },
   { place: "2nd", amount: "₹1,000", emoji: "🥈", rank: 2 },
-  { place: "3rd", amount: "₹500",   emoji: "🥉", rank: 3 },
+  { place: "3rd", amount: "₹500", emoji: "🥉", rank: 3 },
 ];
 
 const rules = [
   { text: "Team size: 2–4 members from any year (1st–4th)", icon: "👥" },
-  { text: "All team members must be from the college",       icon: "🏫" },
-  { text: "Teams must submit PPT before the deadline",       icon: "📅" },
+  { text: "All team members must be from the college", icon: "🏫" },
+  { text: "Teams must submit PPT before the deadline", icon: "📅" },
   { text: "Hardware integration is mandatory, not optional", icon: "⚙️" },
-  { text: "Plagiarism of code or ideas will lead to DQ",    icon: "🚫" },
-  { text: "Teams can use open-source libraries & frameworks",icon: "📦" },
-  { text: "Final project must be demonstrated live",         icon: "🎥" },
+  {
+    text: "Ideas must be original and not copied from existing projects",
+    icon: "📝",
+  },
+  {
+    text: "The video must be uploaded to YouTube and the link shared",
+    icon: "🔴",
+  },
+  { text: "Plagiarism of code or ideas will lead to DQ", icon: "🚫" },
+  { text: "Teams can use open-source libraries & frameworks", icon: "📦" },
+  { text: "Final project must be demonstrated live", icon: "🎥" },
 ];
 
 const submissionRequirements = [
-  { title: "PPT Submission",      desc: "Mandatory presentation slides covering your project",  icon: "📊", tag: "Required", color: "orange" },
-  { title: "GitHub Repository",   desc: "Optional: share your open source code repository",     icon: "💻", tag: "Optional", color: "blue" },
-  { title: "Software Demo",       desc: "Optional: a working demo of your software component",  icon: "⚙️", tag: "Optional", color: "blue" },
-  { title: "Hardware Demo Video", desc: "Optional: showcase your hardware integration on video", icon: "🎥", tag: "Optional", color: "blue" },
+  {
+    title: "PPT Submission",
+    desc: "Mandatory presentation slides covering your project",
+    icon: "📊",
+    tag: "Required",
+    color: "orange",
+  },
+  {
+    title: "GitHub Repository",
+    desc: "Optional: share your open source code repository",
+    icon: "💻",
+    tag: "Optional",
+    color: "blue",
+  },
+  {
+    title: "Software Demo",
+    desc: "Optional: a working demo of your software component [It can be MVP link or youtube video link]",
+    icon: "⚙️",
+    tag: "Optional",
+    color: "blue",
+  },
+  {
+    title: "Hardware Demo Video",
+    desc: "Optional: showcase your hardware integration on video , The video must be uploaded to YouTube and the link shared",
+    icon: "🎥",
+    tag: "Optional",
+    color: "blue",
+  },
 ];
 
 const features = [
-  { icon: "💡", num: "01", title: "Innovation First",  desc: "Build solutions combining software intelligence with hardware creativity." },
-  { icon: "⚙️", num: "02", title: "Integration Focus", desc: "Master embedded systems, IoT, and web platforms in one cohesive prototype." },
-  { icon: "🚀", num: "03", title: "Real Impact",        desc: "Cross-year teams (1st–4th year) working on projects that matter." },
+  {
+    icon: "💡",
+    num: "01",
+    title: "Innovation First",
+    desc: "Build solutions combining software intelligence with hardware creativity.",
+  },
+  {
+    icon: "⚙️",
+    num: "02",
+    title: "Integration Focus",
+    desc: "Master embedded systems, IoT, and web platforms in one cohesive prototype.",
+  },
+  {
+    icon: "🚀",
+    num: "03",
+    title: "Real Impact",
+    desc: "Cross-year teams (1st–4th year) working on projects that matter.",
+  },
 ];
+
+const siteUrl = "https://iie-codecraft.vercel.app";
+const pageTitle = "CODECRAFT 2026 | Hardware-First Hackathon by IIE Tech Club";
+const pageDescription =
+  "Register for CODECRAFT 2026, the IIE Tech Club hackathon at Ideal Institute of Engineering where student teams build software and hardware prototypes with live demos, prizes, and certificates.";
+const pageKeywords =
+  "CODECRAFT, CODECRAFT 2026, IIE Tech Club, Ideal Institute of Engineering hackathon, hardware hackathon, software hardware project competition, student hackathon";
+const socialImage = `${siteUrl}/CodeCraft.png`;
+
+const eventStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Event",
+  name: "CODECRAFT 2026",
+  description: pageDescription,
+  url: siteUrl,
+  image: [socialImage],
+  startDate: "2026-09-21T09:00:00+05:30",
+  endDate: "2026-09-25T18:00:00+05:30",
+  eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+  eventStatus: "https://schema.org/EventScheduled",
+  keywords: pageKeywords,
+  location: {
+    "@type": "Place",
+    name: "Ideal Institute of Engineering",
+    address: "Ideal Institute of Engineering campus",
+  },
+  organizer: {
+    "@type": "Organization",
+    name: "IIE Tech Club",
+    url: siteUrl,
+  },
+};
 ---
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="CODECRAFT — Where Software Meets Hardware. The ultimate hackathon at Ideal Institute of Engineering where builders blend code, circuits, and creativity." />
-    <title>CODECRAFT | Where Software Meets Hardware</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="keywords" content={pageKeywords} />
+    <meta name="author" content="IIE Tech Club" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#020811" />
+    <meta name="format-detection" content="telephone=yes" />
+    <link rel="canonical" href={siteUrl} />
+    <title>{pageTitle}</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CODECRAFT" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="352" />
+    <meta property="og:image:height" content="236" />
+    <meta
+      property="og:image:alt"
+      content="CODECRAFT hardware-first hackathon logo"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta
+      name="twitter:image:alt"
+      content="CODECRAFT hardware-first hackathon logo"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="/CodeCraft.png" />
+    <link rel="apple-touch-icon" href="/CodeCraft.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preload" as="image" href={logoImg.src} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(eventStructuredData)}
+    />
   </head>
 
   <body>
     <!-- ── Page shell ── -->
     <div class="page-shell" id="page-shell">
-
       <!-- Ambient background orbs -->
-      <div aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:0;">
-        <div style="position:absolute;width:700px;height:700px;background:#4facfe;top:-100px;left:-200px;border-radius:50%;filter:blur(140px);opacity:0.06;"></div>
-        <div style="position:absolute;width:700px;height:700px;background:#8e2de2;bottom:-100px;right:-150px;border-radius:50%;filter:blur(140px);opacity:0.06;"></div>
-        <div style="position:absolute;width:500px;height:500px;background:#00f2fe;top:40%;left:55%;border-radius:50%;filter:blur(140px);opacity:0.04;transform:translate(-50%,-50%);"></div>
+      <div
+        class="ambient-bg"
+        aria-hidden="true"
+        style="position:fixed;inset:0;pointer-events:none;z-index:0;"
+      >
+        <div
+          style="position:absolute;width:700px;height:700px;background:#4facfe;top:-100px;left:-200px;border-radius:50%;filter:blur(140px);opacity:0.06;"
+        >
+        </div>
+        <div
+          style="position:absolute;width:700px;height:700px;background:#8e2de2;bottom:-100px;right:-150px;border-radius:50%;filter:blur(140px);opacity:0.06;"
+        >
+        </div>
+        <div
+          style="position:absolute;width:500px;height:500px;background:#00f2fe;top:40%;left:55%;border-radius:50%;filter:blur(140px);opacity:0.04;transform:translate(-50%,-50%);"
+        >
+        </div>
       </div>
 
       <CustomCursor />
@@ -104,14 +317,12 @@ const features = [
       <Navbar />
 
       <main id="main-content">
-
         <!-- ══════════════════════════════════════════════ HERO ══ -->
         <section class="hero" id="home" aria-label="Hero">
           <div class="hero-grid-bg" aria-hidden="true"></div>
 
           <div class="wrap" style="position:relative;z-index:2;">
             <div class="hero-content">
-
               <!-- Left text column -->
               <div class="hero-text">
                 <div class="hero-eyebrow">
@@ -120,18 +331,28 @@ const features = [
                 </div>
 
                 <h1 class="hero-heading">
-                  <span class="hero-heading-code">CODE</span><span class="hero-heading-craft">CRAFT</span>
+                  <span class="hero-heading-code">CODE</span><span
+                    class="hero-heading-craft">CRAFT</span
+                  >
                 </h1>
 
                 <p class="hero-tagline">Where Software Meets Hardware</p>
 
-                <p class="hero-desc">
-                  <span style="color:var(--c-cyan);">// STATUS: ACTIVE</span><br/>
-                  Bridge the gap between virtual logic and physical circuits. Join the ultimate hardware-first hackathon where raw code meets real engineering.
+                <p
+                  class="hero-desc"
+                  style="color:var(--c-cyan); 
+  text-shadow: 0 0 15px rgba(0, 242, 254, 0.4);"
+                >
+                  Bridge the gap between virtual logic and physical circuits.
+                  Join the ultimate hardware-first hackathon where raw code
+                  meets real engineering.
                 </p>
-
                 <!-- Countdown -->
-                <div class="countdown" id="countdown" aria-label="Time until event">
+                <div
+                  class="countdown"
+                  id="countdown"
+                  aria-label="Time until event"
+                >
                   <div class="cd-unit">
                     <span class="cd-val" id="cd-days">--</span>
                     <span class="cd-lbl">Days</span>
@@ -155,13 +376,33 @@ const features = [
 
                 <!-- CTAs -->
                 <div class="hero-actions">
-                  <button type="button" class="btn-primary" id="hero-register-btn" data-auth-trigger>
+                  <button
+                    type="button"
+                    class="btn-primary"
+                    id="hero-register-btn"
+                    data-auth-trigger
+                  >
                     Register Now
-                    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" style="width:16px;height:16px;">
-                      <path d="M4 10h12M12 5l5 5-5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <svg
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      aria-hidden="true"
+                      style="width:16px;height:16px;"
+                    >
+                      <path
+                        d="M4 10h12M12 5l5 5-5 5"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"></path>
                     </svg>
                   </button>
-                  <button class="btn-ghost" type="button" data-scroll-to="#about" id="hero-learn-btn">
+                  <button
+                    class="btn-ghost"
+                    type="button"
+                    data-scroll-to="#about"
+                    id="hero-learn-btn"
+                  >
                     Learn More ↓
                   </button>
                 </div>
@@ -169,36 +410,112 @@ const features = [
 
               <!-- Right visual column -->
               <div class="hero-visual" aria-hidden="true">
-                <div class="logo-stage">
-                  <!-- HUD Tactical Brackets -->
-                  <div class="hud-corner h-tl"></div>
-                  <div class="hud-corner h-tr"></div>
-                  <div class="hud-corner h-bl"></div>
-                  <div class="hud-corner h-br"></div>
-                  
-                  <!-- HUD Data Readouts -->
-                  <div class="hud-data d-left">SYS_v2.0.4</div>
-                  <div class="hud-data d-right">LOC: 23.8°N</div>
+                <div class="cyber-station">
+                  <!-- Abstract Circuit Lines -->
+                  <div class="circuit-bg">
+                    <svg viewBox="0 0 400 400" preserveAspectRatio="none">
+                      <path
+                        d="M 0 50 L 150 50 L 200 100 L 400 100"
+                        class="circuit-path p1"></path>
+                      <path
+                        d="M 400 300 L 250 300 L 200 250 L 0 250"
+                        class="circuit-path p2"></path>
+                      <path
+                        d="M 100 0 L 100 120 L 150 170 L 150 400"
+                        class="circuit-path p3"></path>
+                      <path
+                        d="M 300 400 L 300 150 L 250 100"
+                        class="circuit-path p4"></path>
 
-                  <!-- Ambient Elements -->
-                  <div class="logo-halo"></div>
-                  <div class="logo-ring lr-1"></div>
-                  <div class="logo-ring lr-2"></div>
-                  <div class="logo-ring lr-3"></div>
-                  <div class="logo-ring lr-4"></div>
+                      <circle cx="150" cy="50" r="4" class="circuit-node"
+                      ></circle>
+                      <circle cx="200" cy="100" r="4" class="circuit-node"
+                      ></circle>
+                      <circle cx="250" cy="300" r="4" class="circuit-node"
+                      ></circle>
+                      <circle cx="200" cy="250" r="4" class="circuit-node"
+                      ></circle>
+                      <circle cx="100" cy="120" r="4" class="circuit-node"
+                      ></circle>
+                      <circle cx="150" cy="170" r="4" class="circuit-node"
+                      ></circle>
+                      <circle cx="250" cy="100" r="4" class="circuit-node"
+                      ></circle>
+                      <circle cx="300" cy="150" r="4" class="circuit-node"
+                      ></circle>
+                    </svg>
+                  </div>
 
-                  <!-- Enhanced Orbits -->
-                  <div class="orbit orbit-1">
-                    <span class="orbit-node node-a">0x1A</span>
+                  <!-- Hardware Microcontroller -->
+                  <div class="mcu-board">
+                    <div class="mcu-core">
+                      <img
+                        src={logoImg.src}
+                        width={logoImg.width}
+                        height={logoImg.height}
+                        alt="CodeCraft hardware hackathon logo"
+                        class="mcu-logo"
+                        decoding="async"
+                        fetchpriority="high"
+                      />
+                    </div>
+                    <div class="mcu-pins top">
+                      <i></i><i></i><i></i><i></i><i></i><i></i>
+                    </div>
+                    <div class="mcu-pins bottom">
+                      <i></i><i></i><i></i><i></i><i></i><i></i>
+                    </div>
+                    <div class="mcu-pins left">
+                      <i></i><i></i><i></i><i></i>
+                    </div>
+                    <div class="mcu-pins right">
+                      <i></i><i></i><i></i><i></i>
+                    </div>
+
+                    <div class="mcu-led led-tx"></div>
+                    <div class="mcu-led led-rx"></div>
                   </div>
-                  <div class="orbit orbit-2">
-                    <span class="orbit-node node-b">CMD</span>
+
+                  <!-- Glass Terminal overlapping -->
+                  <div class="glass-terminal">
+                    <div class="term-header">
+                      <div class="term-btns">
+                        <span></span><span></span><span></span>
+                      </div>
+                      <div class="term-title">bash - root@codecraft</div>
+                    </div>
+                    <div class="term-body">
+                      <div class="t-line">
+                        <span class="t-prompt">root@codecraft:~#</span> ./init_hardware.sh
+                      </div>
+                      <div class="t-line t-process">
+                        [ OK ] Booting neural subsystem...
+                      </div>
+                      <div class="t-line t-process">
+                        [ OK ] Linking code to logic gates...
+                      </div>
+                      <div class="t-line t-process">
+                        [ OK ] Hardware synced successfully!
+                      </div>
+                      <div class="t-line">
+                        <span class="t-prompt">root@codecraft:~#</span> execute_hackathon.exe
+                      </div>
+                      <div class="t-line t-success">
+                        &gt;&gt; COMPILING INNOVATION...
+                      </div>
+                      <div class="t-cursor"></div>
+                    </div>
                   </div>
-                  
-                  <!-- Logo with Glitch Container -->
-                  <div class="logo-container">
-                    <img src={logoImg.src} alt="" class="logo-img" />
-                    <div class="logo-scanner"></div>
+
+                  <!-- Floating HUD elements -->
+                  <div class="hud-box hud-tr">
+                    <span class="hud-lbl">SYS.STATE</span>
+                    <span class="hud-val pulse-val">OPTIMAL</span>
+                  </div>
+
+                  <div class="hud-box hud-bl">
+                    <span class="hud-lbl">LATENCY</span>
+                    <span class="hud-val">12ms</span>
                   </div>
                 </div>
               </div>
@@ -210,7 +527,9 @@ const features = [
         <div class="stats-bar" role="region" aria-label="Event stats">
           <div class="wrap stats-bar-inner">
             <div class="stat-item">
-              <span class="stat-value" data-counter="3500" data-suffix="₹">₹3500</span>
+              <span class="stat-value" data-counter="3500" data-suffix="₹"
+                >₹3500</span
+              >
               <span class="stat-label">Prize Pool</span>
             </div>
             <div class="stat-divider" aria-hidden="true"></div>
@@ -220,7 +539,9 @@ const features = [
             </div>
             <div class="stat-divider" aria-hidden="true"></div>
             <div class="stat-item">
-              <span class="stat-value" data-counter="26" data-suffix=" Days">26 Days</span>
+              <span class="stat-value" data-counter="26" data-suffix=" Days"
+                >26 Days</span
+              >
               <span class="stat-label">Event Duration</span>
             </div>
             <div class="stat-divider" aria-hidden="true"></div>
@@ -238,19 +559,40 @@ const features = [
           <div class="wrap">
             <div class="section-header reveal">
               <p class="section-kicker">What is CODECRAFT?</p>
-              <h2 class="section-title" id="about-title">Build. Integrate. Innovate.</h2>
-              <p class="section-sub">A hackathon where software meets hardware — teams build real, working projects that blend code with circuits.</p>
+              <h2 class="section-title" id="about-title">
+                Build. Integrate. Innovate.
+              </h2>
+              <p class="section-sub">
+                A hackathon where software meets hardware — teams build real,
+                working projects that blend code with circuits.
+              </p>
             </div>
 
-            <div class="feature-grid reveal-stagger">
-              {features.map((f, i) => (
-                <div class="fcard" data-index={i + 1}>
-                  <span class="fcard-num">MODULE_{f.num}</span>
-                  <span class="fcard-icon">{f.icon}</span>
-                  <h3>{f.title}</h3>
-                  <p>{f.desc}</p>
-                </div>
-              ))}
+            <div class="core-modules-grid reveal-stagger">
+              {
+                features.map((f, i) => (
+                  <div class="core-module" data-index={i + 1}>
+                    <div class="cm-glow" />
+                    <div class="cm-border-top" />
+                    <div class="cm-border-bottom" />
+                    <div class="cm-header">
+                      <span class="cm-id">
+                        SYS_CORE // {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span class="cm-status">ONLINE</span>
+                    </div>
+                    <div class="cm-body">
+                      <div class="cm-icon-box">
+                        <span class="cm-icon">{f.icon}</span>
+                      </div>
+                      <div class="cm-content">
+                        <h3 class="cm-title">{f.title}</h3>
+                        <p class="cm-desc">{f.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
             </div>
           </div>
         </section>
@@ -263,21 +605,32 @@ const features = [
             <div class="section-header reveal">
               <p class="section-kicker">Rewards</p>
               <h2 class="section-title" id="prizes-title">Prize Pool</h2>
-              <p class="section-sub">Total Prize Pool: ₹3,500 + Certificates for all participants</p>
+              <p class="section-sub">
+                Total Prize Pool: ₹3,500 + Certificates for all participants
+              </p>
             </div>
 
-            <div class="prizes-podium reveal">
-              {prizes.map((p) => (
-                <div class={`podium-card rank-${p.rank}`} data-rank={p.rank}>
-                  <div class="podium-bar" aria-hidden="true"></div>
-                  <div class="podium-medal">{p.emoji}</div>
-                  <div class="podium-place">{p.place} Place</div>
-                  <div class="podium-amount">{p.amount}</div>
-                </div>
-              ))}
+            <div class="bounty-podium reveal">
+              {
+                prizes.map((p) => (
+                  <div class={`bounty-card rank-${p.rank}`} data-rank={p.rank}>
+                    <div class="bc-glitch-layer" aria-hidden="true" />
+                    <div class="bc-content">
+                      <div class="bc-rank-badge">0{p.rank}</div>
+                      <div class="bc-medal">{p.emoji}</div>
+                      <div class="bc-place">{p.place} BOUNTY</div>
+                      <div class="bc-amount">{p.amount}</div>
+                      <div class="bc-hex-bg" />
+                    </div>
+                  </div>
+                ))
+              }
             </div>
 
-            <p class="reveal" style="text-align:center;color:var(--c-muted);font-size:0.9rem;margin-top:2rem;">
+            <p
+              class="reveal"
+              style="text-align:center;color:var(--c-muted);font-size:0.9rem;margin-top:2rem;"
+            >
               🏆 All participants receive digital certificates of participation
             </p>
           </div>
@@ -294,63 +647,80 @@ const features = [
               <p class="section-sub">Key dates to keep in your calendar</p>
             </div>
 
-            <div class="timeline-road reveal">
-              {timelineRows.map((row) => (
-                <div class={`timeline-lane ${row.variant} ${row.isLast ? 'timeline-lane-last' : 'timeline-lane-continues'}`}>
-                  {row.items.map((item) => {
+            <!-- Desktop horizontal pipeline -->
+            <div class="codecraft-timeline-hz reveal hide-on-mobile">
+              <div class="hz-track" aria-hidden="true">
+                <span class="hz-track-seg hz-zig hz-zig-1"></span>
+                <span class="hz-track-seg hz-zig hz-zig-2"></span>
+                <span class="hz-track-seg hz-zig hz-zig-3"></span>
+                <span class="hz-track-seg hz-zig hz-zig-4"></span>
+                <span class="hz-track-seg hz-zig hz-zig-5"></span>
+              </div>
+              <div class="hz-nodes">
+                {
+                  timelineStops.map((item, index) => {
+                    const isUp = index % 2 === 0;
                     const iconValue = item.icon;
                     const isStringIcon = typeof iconValue === "string";
-                    const isEmojiIcon = isStringIcon && [...iconValue].length <= 3;
+                    const isEmojiIcon =
+                      isStringIcon && [...iconValue].length <= 3;
                     const IconComponent = item.icon;
+
                     return (
-                      <article class={`timeline-stop tone-${item.tone}`} style={`--slot: ${item.slot};`}>
-                        <span class="timeline-node">
-                          <span class="timeline-emoji">
-                            {isEmojiIcon
-                              ? iconValue
-                              : isStringIcon
-                                ? <img src={iconValue} alt="" loading="lazy" />
-                                : <IconComponent />}
-                          </span>
-                        </span>
-                        <div class="timeline-copy">
-                          <h3>{item.title}</h3>
-                          <p class="timeline-date">{item.date}</p>
-                          <p class="timeline-desc">{item.desc}</p>
+                      <div class={`hz-item ${isUp ? "hz-up" : "hz-down"}`}>
+                        <article class="hz-content">
+                          <p class="hz-date">{item.date}</p>
+                          <h3 class="hz-title">{item.title}</h3>
+                          <p class="hz-desc">{item.desc}</p>
+                        </article>
+                        <div class={`hz-dot tone-${item.tone}`}>
+                          <div class="hz-icon">
+                            {isEmojiIcon ? (
+                              <span>{iconValue}</span>
+                            ) : isStringIcon ? (
+                              <img src={iconValue} alt="" loading="lazy" />
+                            ) : (
+                              <IconComponent />
+                            )}
+                          </div>
                         </div>
-                      </article>
+                      </div>
                     );
-                  })}
-                </div>
-              ))}
+                  })
+                }
+              </div>
             </div>
 
-            <!-- Mobile vertical timeline (shown only below 768px) -->
-            <div class="timeline-mobile reveal">
-              {timelineStops.map((item) => {
-                const iconValue = item.icon;
-                const isStringIcon = typeof iconValue === "string";
-                const isEmojiIcon = isStringIcon && [...iconValue].length <= 3;
-                const IconComponent = item.icon;
-                return (
-                  <div class="tl-stop">
-                    <div class={`tl-node tone-${item.tone}`}>
-                      {isEmojiIcon
-                        ? <span style="font-size:0.9rem;">{iconValue}</span>
-                        : isStringIcon
-                          ? <img src={iconValue} alt="" loading="lazy" />
-                          : <IconComponent />}
+            <!-- Mobile vertical timeline -->
+            <div class="timeline-mobile reveal show-on-mobile">
+              {
+                timelineStops.map((item) => {
+                  const iconValue = item.icon;
+                  const isStringIcon = typeof iconValue === "string";
+                  const isEmojiIcon =
+                    isStringIcon && [...iconValue].length <= 3;
+                  const IconComponent = item.icon;
+                  return (
+                    <div class="tl-stop">
+                      <div class={`tl-node tone-${item.tone}`}>
+                        {isEmojiIcon ? (
+                          <span style="font-size:0.9rem;">{iconValue}</span>
+                        ) : isStringIcon ? (
+                          <img src={iconValue} alt="" loading="lazy" />
+                        ) : (
+                          <IconComponent />
+                        )}
+                      </div>
+                      <div class="tl-content">
+                        <h3 class="tl-title">{item.title}</h3>
+                        <p class="tl-date">{item.date}</p>
+                        <p class="tl-desc">{item.desc}</p>
+                      </div>
                     </div>
-                    <div class="tl-content">
-                      <h3 class="tl-title">{item.title}</h3>
-                      <p class="tl-date">{item.date}</p>
-                      <p class="tl-desc">{item.desc}</p>
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              }
             </div>
-
           </div>
         </section>
 
@@ -360,63 +730,126 @@ const features = [
         <section class="section" id="rules" aria-labelledby="rules-title">
           <div class="wrap">
             <div class="section-header reveal">
-              <p class="section-kicker">Guidelines</p>
-              <h2 class="section-title" id="rules-title">Participation Rules</h2>
-              <p class="section-sub">Read carefully before registering</p>
+              <p class="section-kicker">Participation Rules</p>
+              <h2 class="section-title" id="rules-title">System Protocols</h2>
+              <p class="section-sub">
+                Keep your team eligible by following the core CODECRAFT event
+                requirements.
+              </p>
             </div>
 
-            <div class="rules-grid reveal-stagger">
-              {rules.map((rule, idx) => (
-                <div class="rule-card">
-                  <span class="rule-num">{String(idx + 1).padStart(2, "0")}</span>
-                  <span class="rule-icon">{rule.icon}</span>
-                  <p class="rule-text">{rule.text}</p>
-                </div>
-              ))}
-            </div>
+            <ol
+              class="proto-rules-grid reveal-stagger"
+              aria-label="CODECRAFT rules"
+            >
+              {
+                rules.map((rule, index) => (
+                  <li class="proto-rule">
+                    <div class="pr-marker" aria-hidden="true">
+                      <span class="pr-line" />
+                      <span class="pr-hex">
+                        R{String(index + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+                    <div class="pr-content">
+                      <span class="pr-icon" aria-hidden="true">
+                        {rule.icon}
+                      </span>
+                      <p class="pr-text">{rule.text}</p>
+                    </div>
+                  </li>
+                ))
+              }
+            </ol>
           </div>
         </section>
 
         <div class="section-divider"></div>
 
         <!-- ══════════════════════════════════════════════ SUBMISSION ══ -->
-        <section class="section" id="submission" aria-labelledby="submission-title">
+        <section
+          class="section"
+          id="submission"
+          aria-labelledby="submission-title"
+        >
           <div class="wrap">
             <div class="section-header reveal">
               <p class="section-kicker">Deliverables</p>
-              <h2 class="section-title" id="submission-title">Submission Requirements</h2>
-              <p class="section-sub">Submit between 10–20 September. Include all mandatory materials.</p>
+              <h2 class="section-title" id="submission-title">
+                Submission Requirements
+              </h2>
+              <p class="section-sub">
+                Submit between 10–20 September. Include all mandatory materials.
+              </p>
             </div>
 
-            <div class="sub-grid reveal-stagger">
-              {submissionRequirements.map((req) => (
-                <div class={`sub-card sc-${req.color}`}>
-                  <span class="sub-icon">{req.icon}</span>
-                  <span class={`sub-tag tag-${req.tag.toLowerCase()}`}>{req.tag}</span>
-                  <h3>{req.title}</h3>
-                  <p>{req.desc}</p>
+            <div class="payload-grid reveal-stagger">
+              {
+                submissionRequirements.map((req) => (
+                  <div class={`payload-card pc-${req.color}`}>
+                    <div class="pc-accents">
+                      <>
+                        <span />
+                        <span />
+                        <span />
+                        <span />
+                      </>
+                    </div>
+                    <div class="pc-top">
+                      <span class={`pc-tag ptag-${req.tag.toLowerCase()}`}>
+                        [{req.tag}]
+                      </span>
+                      <span class="pc-icon">{req.icon}</span>
+                    </div>
+                    <h3 class="pc-title">{req.title}</h3>
+                    <p class="pc-desc">{req.desc}</p>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="payload-tips reveal">
+              <div class="pt-block">
+                <div class="pt-head">
+                  <span class="pt-icon">📝</span>
+                  <span class="pt-title">FORMAT_REQ // PPT</span>
                 </div>
-              ))}
-            </div>
-
-            <div class="sub-tips reveal">
-              <div class="tip-block">
-                <h3>📝 PPT Format</h3>
-                <ul>
-                  <li>Maximum 15 slides</li>
-                  <li>Include problem statement &amp; solution</li>
-                  <li>Add team member details</li>
-                  <li>Showcase hardware-software integration</li>
-                </ul>
+                <div class="pt-list">
+                  <div class="pt-item">
+                    <span class="pt-bullet">&gt;</span> Maximum 15 slides
+                  </div>
+                  <div class="pt-item">
+                    <span class="pt-bullet">&gt;</span> Include problem statement
+                    &amp; solution
+                  </div>
+                  <div class="pt-item">
+                    <span class="pt-bullet">&gt;</span> Add team member details
+                  </div>
+                  <div class="pt-item">
+                    <span class="pt-bullet">&gt;</span> Showcase hardware-software
+                    integration
+                  </div>
+                </div>
               </div>
-              <div class="tip-block">
-                <h3>💡 Pro Tips</h3>
-                <ul>
-                  <li>Clearly explain your innovation</li>
-                  <li>Include diagrams and flowcharts</li>
-                  <li>Mention technologies used</li>
-                  <li>Highlight real-world applications</li>
-                </ul>
+              <div class="pt-block">
+                <div class="pt-head">
+                  <span class="pt-icon">💡</span>
+                  <span class="pt-title">SYS_TIPS // PRO</span>
+                </div>
+                <div class="pt-list">
+                  <div class="pt-item">
+                    <span class="pt-bullet">&gt;</span> Clearly explain your innovation
+                  </div>
+                  <div class="pt-item">
+                    <span class="pt-bullet">&gt;</span> Include diagrams and flowcharts
+                  </div>
+                  <div class="pt-item">
+                    <span class="pt-bullet">&gt;</span> Mention technologies used
+                  </div>
+                  <div class="pt-item">
+                    <span class="pt-bullet">&gt;</span> Highlight real-world applications
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -425,30 +858,89 @@ const features = [
         <div class="section-divider"></div>
 
         <!-- ══════════════════════════════════════════════ ORGANIZERS ══ -->
-        <section class="section" id="organizers" aria-labelledby="organizers-title">
+        <section
+          class="section"
+          id="organizers"
+          aria-labelledby="organizers-title"
+        >
           <div class="wrap">
             <div class="section-header reveal">
               <p class="section-kicker">The Team</p>
-              <h2 class="section-title" id="organizers-title">Meet the Organizers</h2>
-              <p class="section-sub">Passionate people bringing CODECRAFT to life</p>
+              <h2 class="section-title" id="organizers-title">
+                Meet the Organizers
+              </h2>
+              <p class="section-sub">
+                Passionate people bringing CODECRAFT to life
+              </p>
             </div>
 
             <div class="org-grid reveal-stagger">
-              {organizers.map((org, i) => (
-                <div class="org-card" style={`--i: ${i}`}>
-                  <div class="org-av">{org.init}</div>
-                  <p class="org-name">{org.name}</p>
-                  <p class="org-role">Organizer</p>
-                  <div class="org-socials">
-                    <a href={org.github} target="_blank" rel="noreferrer" aria-label={`${org.name} GitHub`} class="org-social">
-                      <svg viewBox="0 0 24 24"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.8 1.2 1.8 1.2 1 .1 1.7-.2 2.1-.6.1-.7.4-1.1.7-1.3-2.5-.3-5.1-1.2-5.1-5.4 0-1.2.4-2.2 1.1-3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3 .9a10.5 10.5 0 0 1 5.4 0c2.1-1.2 3-.9 3-.9.6 1.6.2 2.8.1 3.1.7.8 1.1 1.8 1.1 3 0 4.2-2.6 5.1-5.1 5.4.4.3.8 1 .8 2.1v3.1c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z" fill="currentColor"/></svg>
-                    </a>
-                    <a href={org.linkedin} target="_blank" rel="noreferrer" aria-label={`${org.name} LinkedIn`} class="org-social">
-                      <svg viewBox="0 0 24 24"><path d="M4.98 3.5A2.48 2.48 0 1 1 0 3.48a2.48 2.48 0 0 1 4.98.02ZM.5 8.2h4.9V24H.5V8.2Zm8.1 0h4.7v2.1h.1c.7-1.2 2.5-2.5 5.2-2.5 5.5 0 6.5 3.6 6.5 8.2V24h-4.9v-7c0-1.7 0-3.9-2.3-3.9s-2.7 1.8-2.7 3.8V24H8.6V8.2Z" fill="currentColor"/></svg>
-                    </a>
+              {
+                organizers.map((org, i) => (
+                  <div class="org-card" style={`--i: ${i}`}>
+                    <div class="org-scanline" />
+                    <div class="org-corner-tl" />
+                    <div class="org-corner-br" />
+
+                    <div class="org-av">
+                      {org.imageUrl ? (
+                        <img
+                          src={
+                            typeof org.imageUrl === "string"
+                              ? org.imageUrl
+                              : org.imageUrl.src
+                          }
+                          alt={org.name}
+                          class="org-img"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div class="org-init">{org.init}</div>
+                      )}
+                      <svg class="org-av-ring" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="48" />
+                      </svg>
+                    </div>
+
+                    <div class="org-details">
+                      <p class="org-role">{org.role}</p>
+                      <p class="org-name">{org.name}</p>
+                      <div class="org-bar" />
+                    </div>
+
+                    <div class="org-socials">
+                      <a
+                        href={org.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${org.name} GitHub`}
+                        class="org-social"
+                      >
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.8 1.2 1.8 1.2 1 .1 1.7-.2 2.1-.6.1-.7.4-1.1.7-1.3-2.5-.3-5.1-1.2-5.1-5.4 0-1.2.4-2.2 1.1-3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3 .9a10.5 10.5 0 0 1 5.4 0c2.1-1.2 3-.9 3-.9.6 1.6.2 2.8.1 3.1.7.8 1.1 1.8 1.1 3 0 4.2-2.6 5.1-5.1 5.4.4.3.8 1 .8 2.1v3.1c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </a>
+                      <a
+                        href={org.linkedin}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${org.name} LinkedIn`}
+                        class="org-social"
+                      >
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="M4.98 3.5A2.48 2.48 0 1 1 0 3.48a2.48 2.48 0 0 1 4.98.02ZM.5 8.2h4.9V24H.5V8.2Zm8.1 0h4.7v2.1h.1c.7-1.2 2.5-2.5 5.2-2.5 5.5 0 6.5 3.6 6.5 8.2V24h-4.9v-7c0-1.7 0-3.9-2.3-3.9s-2.7 1.8-2.7 3.8V24H8.6V8.2Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              }
             </div>
           </div>
         </section>
@@ -458,67 +950,57 @@ const features = [
         <!-- ══════════════════════════════════════════════ CONTACT ══ -->
         <section class="section" id="contact" aria-labelledby="contact-title">
           <div class="wrap">
-            <div class="contact-card reveal">
-              <div class="contact-aurora contact-aurora-a" aria-hidden="true"></div>
-              <div class="contact-aurora contact-aurora-b" aria-hidden="true"></div>
-
-              <div class="contact-left">
-                <p class="contact-kicker">Get in touch</p>
-                <h2 class="contact-title" id="contact-title">Need Help?</h2>
-                <p class="contact-sub">Reach out to our coordinators directly — we're here to guide you.</p>
-                <div class="contact-chips" aria-label="Support highlights">
-                  <span class="contact-chip">Fast response</span>
-                  <span class="contact-chip">Student coordinators</span>
-                  <span class="contact-chip">Tap to call</span>
-                </div>
+            <div class="support-terminal reveal">
+              <div class="st-header">
+                <span class="st-dot r"></span><span class="st-dot y"
+                ></span><span class="st-dot g"></span>
+                <span class="st-title">COMM_LINK // SECURE_CHANNEL</span>
               </div>
 
-              <div class="contact-right">
-                <a href="tel:+918473868464" class="contact-link" aria-label="Call Ayush Choudhary">
-                  <span class="contact-link-icon">📞</span>
-                  <div style="display:flex;flex-direction:column;gap:0.15rem;">
-                    <span style="font-size:1.1rem;font-weight:600;color:white;">Ayush Choudhary</span>
-                    <span class="contact-link-text">+91 8473 868 464</span>
+              <div class="st-body">
+                <div class="st-left">
+                  <p class="st-prompt">&gt; ping --support_protocol...</p>
+                  <h2 class="st-heading" id="contact-title">SYSTEM SUPPORT</h2>
+                  <p class="st-desc">
+                    Direct uplink established to lead architects. Initiate voice
+                    protocol if assistance is required.
+                  </p>
+
+                  <div class="st-status">
+                    <span class="status-indicator"></span> NODE ONLINE
                   </div>
-                  <span class="contact-link-action">Call</span>
-                </a>
-                <a href="tel:+919832577462" class="contact-link" aria-label="Call Rahidul Khan">
-                  <span class="contact-link-icon">📞</span>
-                  <div style="display:flex;flex-direction:column;gap:0.15rem;">
-                    <span style="font-size:1.1rem;font-weight:600;color:white;">Rahidul Khan</span>
-                    <span class="contact-link-text">+91 9832 577 462</span>
-                  </div>
-                  <span class="contact-link-action">Call</span>
-                </a>
-                <a href="tel:+919382770196" class="contact-link" aria-label="Call Debankan Dutta">
-                  <span class="contact-link-icon">📞</span>
-                  <div style="display:flex;flex-direction:column;gap:0.15rem;">
-                    <span style="font-size:1.1rem;font-weight:600;color:white;">Debankan Dutta</span>
-                    <span class="contact-link-text">+91 9382 770 196</span>
-                  </div>
-                  <span class="contact-link-action">Call</span>
-                </a>
-                <a href="tel:+919832577462" class="contact-link" aria-label="Call Nilotpal Das">
-                  <span class="contact-link-icon">📞</span>
-                  <div style="display:flex;flex-direction:column;gap:0.15rem;">
-                    <span style="font-size:1.1rem;font-weight:600;color:white;">Nilotpal Das</span>
-                    <span class="contact-link-text">+91 9832 577 462</span>
-                  </div>
-                  <span class="contact-link-action">Call</span>
-                </a>
-                <a href="tel:+918473868464" class="contact-link" aria-label="Call Ronit Banerjee">
-                  <span class="contact-link-icon">📞</span>
-                  <div style="display:flex;flex-direction:column;gap:0.15rem;">
-                    <span style="font-size:1.1rem;font-weight:600;color:white;">Ronit Banerjee</span>
-                    <span class="contact-link-text">+91 8473 868 464</span>
-                  </div>
-                  <span class="contact-link-action">Call</span>
-                </a>
+                </div>
+
+                <div class="st-right">
+                  <a
+                    href="tel:+918473868464"
+                    class="comm-link"
+                    aria-label="Call Ayush Choudhary"
+                  >
+                    <div class="comm-icon">📞</div>
+                    <div class="comm-data">
+                      <span class="comm-name">Ayush Choudhary</span>
+                      <span class="comm-num">SYS: +91 8473 868 464</span>
+                    </div>
+                    <div class="comm-action">[ CONNECT ]</div>
+                  </a>
+                  <a
+                    href="tel:+919382770196"
+                    class="comm-link"
+                    aria-label="Call Debankan Dutta"
+                  >
+                    <div class="comm-icon">📞</div>
+                    <div class="comm-data">
+                      <span class="comm-name">Debankan Dutta</span>
+                      <span class="comm-num">SYS: +91 9382 770 196</span>
+                    </div>
+                    <div class="comm-action">[ CONNECT ]</div>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </section>
-
       </main>
 
       <Footer />
@@ -528,76 +1010,120 @@ const features = [
 
     <script is:inline>
       // ── Scroll-to
-      document.querySelectorAll("[data-scroll-to]").forEach(b => {
+      document.querySelectorAll("[data-scroll-to]").forEach((b) => {
         b.addEventListener("click", () => {
           const el = document.querySelector(b.getAttribute("data-scroll-to"));
           el?.scrollIntoView({ behavior: "smooth" });
         });
       });
 
-
       // ── Scroll reveal
-      const ro = new IntersectionObserver((entries) => {
-        entries.forEach(en => {
-          if (en.isIntersecting) { en.target.classList.add("in-view"); ro.unobserve(en.target); }
-        });
-      }, { threshold: 0.1 });
-      document.querySelectorAll(".reveal, .reveal-stagger").forEach(el => ro.observe(el));
+      const ro = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((en) => {
+            if (en.isIntersecting) {
+              en.target.classList.add("in-view");
+              ro.unobserve(en.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document
+        .querySelectorAll(".reveal, .reveal-stagger")
+        .forEach((el) => ro.observe(el));
 
       // ── Counter animation
       const animateCount = (node) => {
         const target = +node.dataset.counter || 0;
         const suffix = node.dataset.suffix || "";
-        const dur = 1400, start = performance.now();
+        const dur = 1400,
+          start = performance.now();
         const tick = (now) => {
           const p = Math.min((now - start) / dur, 1);
-          node.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
+          node.textContent =
+            Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
           if (p < 1) requestAnimationFrame(tick);
         };
         requestAnimationFrame(tick);
       };
-      const co = new IntersectionObserver((entries) => {
-        entries.forEach(en => { if (en.isIntersecting) { animateCount(en.target); co.unobserve(en.target); } });
-      }, { threshold: 0.5 });
-      document.querySelectorAll("[data-counter]").forEach(el => co.observe(el));
+      const co = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((en) => {
+            if (en.isIntersecting) {
+              animateCount(en.target);
+              co.unobserve(en.target);
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+      document
+        .querySelectorAll("[data-counter]")
+        .forEach((el) => co.observe(el));
 
       // ── Countdown to event (21 Sep 2026)
       const target = new Date("2026-09-21T09:00:00");
-      const pad = n => String(n).padStart(2, "0");
+      const pad = (n) => String(n).padStart(2, "0");
       const updateCD = () => {
         const diff = target - Date.now();
-        if (diff <= 0) { document.getElementById("countdown")?.remove(); return; }
+        if (diff <= 0) {
+          document.getElementById("countdown")?.remove();
+          return;
+        }
         const s = Math.floor(diff / 1000);
-        document.getElementById("cd-days").textContent  = pad(Math.floor(s / 86400));
-        document.getElementById("cd-hours").textContent = pad(Math.floor((s % 86400) / 3600));
-        document.getElementById("cd-mins").textContent  = pad(Math.floor((s % 3600) / 60));
-        document.getElementById("cd-secs").textContent  = pad(s % 60);
+        document.getElementById("cd-days").textContent = pad(
+          Math.floor(s / 86400),
+        );
+        document.getElementById("cd-hours").textContent = pad(
+          Math.floor((s % 86400) / 3600),
+        );
+        document.getElementById("cd-mins").textContent = pad(
+          Math.floor((s % 3600) / 60),
+        );
+        document.getElementById("cd-secs").textContent = pad(s % 60);
       };
-      updateCD(); setInterval(updateCD, 1000);
+      updateCD();
+      setInterval(updateCD, 1000);
     </script>
     <script>
-      import { googleLogin } from '../services/authService';
-      
-      document.querySelectorAll<HTMLElement>('[data-auth-trigger]').forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-          e.preventDefault();
-          
-          const ogText = btn.innerHTML;
-          btn.innerHTML = 'Authenticating...';
-          btn.style.pointerEvents = 'none';
+      import {
+        googleLogin,
+        subscribeToAuthChanges,
+      } from "../services/authService";
+      import type { User } from "firebase/auth";
 
-          const { user, error } = await googleLogin();
-          
-          if (user) {
-            window.location.href = '/dashboard';
-          } else {
-            console.error('Authentication failed:', error);
-            btn.innerHTML = ogText;
-            btn.style.pointerEvents = 'auto';
-            alert('Authentication failed, please check your network and try again.');
-          }
-        });
+      // Automatic redirect if already logged in
+      subscribeToAuthChanges((user: User | null) => {
+        if (user) {
+          window.location.href = "/dashboard";
+        }
       });
+
+      document
+        .querySelectorAll<HTMLElement>("[data-auth-trigger]")
+        .forEach((btn) => {
+          btn.addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            const ogText = btn.innerHTML;
+            btn.innerHTML = "Authenticating...";
+            btn.style.pointerEvents = "none";
+
+            const { user, error } = await googleLogin();
+
+            if (user) {
+              window.location.href = "/dashboard";
+            } else {
+              console.error("Authentication failed:", error);
+              btn.innerHTML = ogText;
+              btn.style.pointerEvents = "auto";
+              alert(
+                "Authentication failed, please check your network and try again.",
+              );
+            }
+          });
+        });
     </script>
   </body>
 </html>

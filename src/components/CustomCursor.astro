@@ -7,14 +7,17 @@
 </div>
 
 <style is:global>
-  /* Hide default cursor globally */
-  * {
-    cursor: none !important;
+  /* Hide default cursor only on devices that support hover */
+  @media (hover: hover) and (pointer: fine) {
+    * {
+      cursor: none !important;
+    }
   }
 </style>
 
 <style>
   .cursor-container {
+    display: none; /* Hidden by default */
     position: fixed;
     top: 0;
     left: 0;
@@ -22,6 +25,13 @@
     height: 100%;
     pointer-events: none;
     z-index: 9999;
+  }
+
+  /* Show only on devices that support hover */
+  @media (hover: hover) and (pointer: fine) {
+    .cursor-container {
+      display: block;
+    }
   }
 
   /* Precision Dot */

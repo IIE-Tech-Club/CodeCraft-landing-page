@@ -1118,6 +1118,30 @@ export default function Dashboard() {
             text-decoration-color: rgba(197, 231, 255, 0.9);
           }
 
+          @media (hover: none), (pointer: coarse) {
+            .hero-logout,
+            .action-btn,
+            .pager button {
+              touch-action: manipulation;
+            }
+
+            .hero-logout:hover {
+              background: rgba(3, 8, 18, 0.36);
+            }
+
+            .action-btn:hover {
+              background: transparent;
+              color: #86d4ff;
+              text-decoration-color: rgba(134, 212, 255, 0.55);
+            }
+
+            .hero-logout:active,
+            .action-btn:active,
+            .pager button:active {
+              opacity: 0.86;
+            }
+          }
+
           .empty-row {
             color: #8ea4c4;
           }

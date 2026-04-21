@@ -5,12 +5,15 @@ import {
   GoogleAuthProvider, 
   signInWithPopup, 
   sendPasswordResetEmail,
-  onAuthStateChanged
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence
 } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
 export const signUp = async (email, password) => {
   try {
+    await setPersistence(auth, browserLocalPersistence);
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     console.log("User created:", user);
@@ -23,6 +26,7 @@ export const signUp = async (email, password) => {
 
 export const login = async (email, password) => {
   try {
+    await setPersistence(auth, browserLocalPersistence);
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     console.log("Logged in:", user);
@@ -46,6 +50,7 @@ export const logout = async () => {
 export const googleLogin = async () => {
   const provider = new GoogleAuthProvider();
   try {
+    await setPersistence(auth, browserLocalPersistence);
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
     console.log("Google user:", user);
