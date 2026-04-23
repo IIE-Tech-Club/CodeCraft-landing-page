@@ -33,7 +33,7 @@ import logoImg from "../assets/images/logo-high.png";
       </span>
 
       <!-- Register CTA -->
-      <button class="nav-cta" type="button" data-auth-trigger id="nav-register-btn">
+      <button class="nav-cta" type="button" data-auth-trigger id="nav-register-btn" onclick="window.open('https://student-dashboard-psi-roan.vercel.app/', '_blank')">
         <span>Register</span>
         <svg viewBox="0 0 16 16" fill="none" class="nav-cta-icon" aria-hidden="true">
           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -63,37 +63,37 @@ import logoImg from "../assets/images/logo-high.png";
       </div>
 
       <div class="nav-mobile-sections">
-        <a href="#about"      class="nav-mobile-link" data-close-menu id="ml-about">
+        <a href="#about"      class="nav-mobile-link" id="ml-about">
           <span class="nav-mobile-num">01</span>
           <span class="nav-mobile-text">About</span>
         </a>
-        <a href="#prizes"     class="nav-mobile-link" data-close-menu id="ml-prizes">
+        <a href="#prizes"     class="nav-mobile-link" id="ml-prizes">
           <span class="nav-mobile-num">02</span>
           <span class="nav-mobile-text">Prizes</span>
         </a>
-        <a href="#timeline"   class="nav-mobile-link" data-close-menu id="ml-timeline">
+        <a href="#timeline"   class="nav-mobile-link" id="ml-timeline">
           <span class="nav-mobile-num">03</span>
           <span class="nav-mobile-text">Timeline</span>
         </a>
-        <a href="#rules"      class="nav-mobile-link" data-close-menu id="ml-rules">
+        <a href="#rules"      class="nav-mobile-link" id="ml-rules">
           <span class="nav-mobile-num">04</span>
           <span class="nav-mobile-text">Rules</span>
         </a>
-        <a href="#submission" class="nav-mobile-link" data-close-menu id="ml-submit">
+        <a href="#submission" class="nav-mobile-link" id="ml-submit">
           <span class="nav-mobile-num">05</span>
           <span class="nav-mobile-text">Submission</span>
         </a>
-        <a href="#organizers" class="nav-mobile-link" data-close-menu id="ml-team">
+        <a href="#organizers" class="nav-mobile-link" id="ml-team">
           <span class="nav-mobile-num">06</span>
           <span class="nav-mobile-text">Team</span>
         </a>
-        <a href="#contact"    class="nav-mobile-link" data-close-menu id="ml-contact">
+        <a href="#contact"    class="nav-mobile-link" id="ml-contact">
           <span class="nav-mobile-num">07</span>
           <span class="nav-mobile-text">Contact</span>
         </a>
 
         <div class="nav-mobile-register-spacing">
-          <button class="nav-mobile-cta" type="button" data-auth-trigger data-close-menu id="ml-register">
+          <button class="nav-mobile-cta" type="button" id="ml-register" onclick="window.open('https://student-dashboard-psi-roan.vercel.app/', '_blank')"> 
             <span>Register Now</span>
             <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -869,7 +869,7 @@ import logoImg from "../assets/images/logo-high.png";
   });
 
   /* ── Close menu on link click ── */
-  document.querySelectorAll('[data-close-menu]').forEach(el => {
+  document.querySelectorAll('[ u]').forEach(el => {
     el.addEventListener('click', closeMenu);
   });
 </script>

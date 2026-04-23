@@ -468,8 +468,7 @@ const { logoSrc } = Astro.props;
 </style>
 
 <script>
-  import { subscribeToAuthChanges } from '../services/authService';
-  import type { User } from 'firebase/auth';
+
 
   const loader = document.getElementById('loader');
   const progress = document.getElementById('loader-progress');
@@ -479,7 +478,7 @@ const { logoSrc } = Astro.props;
   const statusText = document.getElementById('status-text');
   const statTeams = document.getElementById('stat-teams');
   const statIdeas = document.getElementById('stat-ideas');
-  const statStatus = document.getElementById('stat-status');
+  // const statStatus = document.getElementById('stat-status');
   const originalBodyOverflow = document.body.style.overflow;
   const originalRootOverflow = document.documentElement.style.overflow;
   const originalScrollBehavior = document.documentElement.style.scrollBehavior;
@@ -546,12 +545,7 @@ const { logoSrc } = Astro.props;
     }
   }, 1500);
 
-  // Update UI values
-  subscribeToAuthChanges((user: User | null) => {
-    if (statStatus) {
-      statStatus.textContent = user ? 'AUTHORIZED' : 'GUEST';
-    }
-  });
+
 
   async function startLoader() {
     // Lock scroll at the top while the loader is visible.

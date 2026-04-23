@@ -344,6 +344,7 @@
   position: relative;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 
@@ -884,6 +885,7 @@
   left: 0;
   width: 380px;
   background: rgba(3, 8, 18, 0.7);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
@@ -999,6 +1001,7 @@
   flex-direction: column;
   gap: 4px;
   z-index: 4;
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
 }
 
@@ -1048,6 +1051,7 @@
   margin-top: -1px;
   position: relative;
   z-index: 10;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 
@@ -1109,6 +1113,7 @@
   padding: 1.5rem;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 
@@ -1248,6 +1253,7 @@
   padding: 2.5rem 1.5rem;
   text-align: center;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   overflow: hidden;
 }
@@ -1343,9 +1349,9 @@
   padding: 1.5rem;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
-
 
 .core-module:hover {
   transform: translateY(-5px);
@@ -1724,6 +1730,7 @@
   text-align: center;
   transition: all 0.3s ease;
   overflow: hidden;
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 }
 
@@ -1894,6 +1901,7 @@
   box-shadow:
     0 20px 50px rgba(0, 0, 0, 0.5),
     inset 0 0 0 1px rgba(0, 242, 254, 0.1);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 
@@ -2100,6 +2108,7 @@
   padding: 1.75rem 1.5rem;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   display: flex;
   flex-direction: column;
@@ -2472,12 +2481,30 @@
     z-index: 2;
   }
 
-  .hz-item:nth-child(1) { left: var(--zig-x-1); top: var(--zig-y-high); }
-  .hz-item:nth-child(2) { left: var(--zig-x-2); top: var(--zig-y-low); }
-  .hz-item:nth-child(3) { left: var(--zig-x-3); top: var(--zig-y-high); }
-  .hz-item:nth-child(4) { left: var(--zig-x-4); top: var(--zig-y-low); }
-  .hz-item:nth-child(5) { left: var(--zig-x-5); top: var(--zig-y-high); }
-  .hz-item:nth-child(6) { left: var(--zig-x-6); top: var(--zig-y-low); }
+  .hz-item:nth-child(1) {
+    left: var(--zig-x-1);
+    top: var(--zig-y-high);
+  }
+  .hz-item:nth-child(2) {
+    left: var(--zig-x-2);
+    top: var(--zig-y-low);
+  }
+  .hz-item:nth-child(3) {
+    left: var(--zig-x-3);
+    top: var(--zig-y-high);
+  }
+  .hz-item:nth-child(4) {
+    left: var(--zig-x-4);
+    top: var(--zig-y-low);
+  }
+  .hz-item:nth-child(5) {
+    left: var(--zig-x-5);
+    top: var(--zig-y-high);
+  }
+  .hz-item:nth-child(6) {
+    left: var(--zig-x-6);
+    top: var(--zig-y-low);
+  }
 
   .hz-dot {
     width: 50px;
@@ -2510,6 +2537,7 @@
       linear-gradient(145deg, rgba(7, 15, 31, 0.9), rgba(5, 10, 24, 0.62)),
       rgba(4, 10, 24, 0.7);
     box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     transform: translateX(-50%);
     transition:
@@ -2743,8 +2771,6 @@
   padding: 0;
 }
 
-
-
 /* ═══════════════════════════════════════════════════════════════
    MODAL
 ═══════════════════════════════════════════════════════════════ */
@@ -2761,6 +2787,7 @@ dialog {
 
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.75);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
 }
 
@@ -2849,8 +2876,6 @@ dialog::backdrop {
     transform: translateY(0);
   }
 }
-
-
 
 /* ═══════════════════════════════════════════════════════════════
    RESPONSIVE — LARGE TABLET (≤ 1024px)
@@ -3035,20 +3060,24 @@ dialog::backdrop {
   .rank-2,
   .rank-3 {
     order: unset;
-    min-height: auto;
+    min-height: initial;
     background: rgba(8, 14, 28, 0.6);
   }
 
-  .rank-1 { order: 1; }
-  .rank-2 { order: 2; }
-  .rank-3 { order: 3; }
+  .rank-1 {
+    order: 1;
+  }
+  .rank-2 {
+    order: 2;
+  }
+  .rank-3 {
+    order: 3;
+  }
 
   .bounty-card {
     padding: 2rem 1.5rem;
     text-align: center;
   }
-
-
 
   .bc-medal {
     font-size: 3rem;

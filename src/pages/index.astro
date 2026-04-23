@@ -81,14 +81,6 @@ const laneVariants = [
   "timeline-lane-bottom",
 ];
 
-const timelineRows = Array.from({ length: timelineRowCount }, (_, i) => ({
-  variant: laneVariants[i] ?? "timeline-lane-middle",
-  isLast: i === timelineRowCount - 1,
-  items: timelineStops
-    .filter((s) => s.row === i + 1)
-    .sort((a, b) => a.slot - b.slot),
-}));
-
 const organizers = [
   {
     name: "Ayush Choudhary",
@@ -139,9 +131,18 @@ const prizes = [
 ];
 
 const rules = [
-  { text: "Team size: 2–4 members from any year (1st–4th)", icon: "👥" },
-  { text: "All team members must be from the college", icon: "🏫" },
-  { text: "Teams must submit PPT before the deadline", icon: "📅" },
+  { 
+    text: "Team size: 2–4 members from any year (1st–4th)", 
+    icon: "👥" 
+  },
+  { 
+    text: "All team members must be from the college", 
+    icon: "🏫" 
+  },
+  { 
+    text: "Teams must submit PPT before the deadline", 
+    icon: "📅" 
+  },
   {
     text: "Ideas must be original and not copied from existing projects",
     icon: "📝",
@@ -150,9 +151,18 @@ const rules = [
     text: "The video must be uploaded to YouTube and the link shared",
     icon: "🔴",
   },
-  { text: "Plagiarism of code or ideas will lead to DQ", icon: "🚫" },
-  { text: "Teams can use open-source libraries & frameworks", icon: "📦" },
-  { text: "Final project must be demonstrated live", icon: "🎥" },
+  { 
+    text: "Plagiarism of code or ideas will lead to DQ", 
+    icon: "🚫" 
+  },
+  { 
+    text: "Teams can use open-source libraries & frameworks", 
+    icon: "📦" 
+  },
+  { 
+    text: "Final project must be demonstrated live", 
+    icon: "🎥" 
+  },
 ];
 
 const submissionRequirements = [
@@ -381,7 +391,7 @@ const eventStructuredData = {
                     type="button"
                     class="btn-primary"
                     id="hero-register-btn"
-                    data-auth-trigger
+                    onclick="window.open('https://student-dashboard-psi-roan.vercel.app/', '_blank')"
                   >
                     Register Now
                     <svg
@@ -1098,45 +1108,6 @@ const eventStructuredData = {
       };
       updateCD();
       setInterval(updateCD, 1000);
-    </script>
-    <script>
-      import {
-        googleLogin,
-        subscribeToAuthChanges,
-      } from "../services/authService";
-      import type { User } from "firebase/auth";
-
-      // Automatic redirect if already logged in
-      subscribeToAuthChanges((user: User | null) => {
-        if (user) {
-          window.location.href = "/dashboard";
-        }
-      });
-
-      document
-        .querySelectorAll<HTMLElement>("[data-auth-trigger]")
-        .forEach((btn) => {
-          btn.addEventListener("click", async (e) => {
-            e.preventDefault();
-
-            const ogText = btn.innerHTML;
-            btn.innerHTML = "Authenticating...";
-            btn.style.pointerEvents = "none";
-
-            const { user, error } = await googleLogin();
-
-            if (user) {
-              window.location.href = "/dashboard";
-            } else {
-              console.error("Authentication failed:", error);
-              btn.innerHTML = ogText;
-              btn.style.pointerEvents = "auto";
-              alert(
-                "Authentication failed, please check your network and try again.",
-              );
-            }
-          });
-        });
     </script>
   </body>
 </html>

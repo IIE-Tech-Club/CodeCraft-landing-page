@@ -1,7 +1,7 @@
 {
   "name": "codecraft",
   "type": "module",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "scripts": {
     "dev": "astro dev --host",
     "build": "astro build",
@@ -13,7 +13,6 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "astro": "^5.17.1",
-    "firebase": "^12.12.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
   },
